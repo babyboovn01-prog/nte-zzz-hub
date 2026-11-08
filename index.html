@@ -11,10 +11,16 @@
 <meta property="og:description" content="Free tools for Neverness to Everness and Zenless Zone Zero: wish simulators, pity tracker, damage calculator, banners, tier lists, codes and databases.">
 <meta property="og:url" content="https://babyboovn01-prog.github.io/nte-zzz-hub/">
 <meta property="og:site_name" content="PityHub">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://babyboovn01-prog.github.io/nte-zzz-hub/assets/og.png">
+<meta property="og:image:alt" content="PityHub — NTE + ZZZ gacha tools hub">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="NTE + ZZZ Hub — Wish Simulators, Pity &amp; Build Tools">
 <meta name="twitter:description" content="Free tools for Neverness to Everness and Zenless Zone Zero: wish simulators, pity tracker, damage calculator, banners, tier lists, codes and databases.">
+<meta name="twitter:image" content="https://babyboovn01-prog.github.io/nte-zzz-hub/assets/og.png">
 <link rel="stylesheet" href="assets/style.css">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"PityHub","url":"https://babyboovn01-prog.github.io/nte-zzz-hub/","description":"Free gacha tools for Neverness to Everness and Zenless Zone Zero."}</script>
 </head>
 <body>
@@ -38,10 +44,11 @@
 <a href="tier-list.html#zzz">ZZZ Tier List</a>
 <a href="codes.html#zzz">ZZZ Codes</a>
 </div></details>
-<a href="damage-calculator.html">Damage Calc</a>
+<a href="damage-calculator.html">Damage Calculator</a>
 <a href="banner-schedule.html">Banners</a>
 </nav><span class="navnote">More games coming soon</span></div></header>
 <main>
+<noscript><p class="warn">This page needs JavaScript enabled: the databases, simulators and calculators render in your browser. Please enable JavaScript and reload.</p></noscript>
 <h1>Neverness to Everness &amp; Zenless Zone Zero — Tools Hub</h1>
 <p>Free, no-login tools for <strong>Neverness to Everness (NTE)</strong> and <strong>Zenless Zone Zero (ZZZ)</strong>. Simulators, pity math, banner dates, tier snapshots, codes and databases — updated for NTE v1.5 and ZZZ v3.3, both arriving <strong>11 Nov 2026</strong>. PityHub is a multi-game hub: more games will be added later.</p>
 <div class="warn"><strong>About NTE rates:</strong> NTE gacha rates are <strong>community-modelled / unverified</strong> — no official Hotta / Perfect World rate sheet was found. Base S rate is disputed (0.6% CBT-era table vs 0.99% current community model); we use the 0.99% model and label it clearly. ZZZ Agent rates (0.6% base, hard pity 90, 50/50) are from the in-game Signal Search Details screen; ZZZ soft pity is community-measured.</div>
@@ -78,7 +85,7 @@
 <h2>Quick simulators — try them here</h2>
 <div class="card">
 <h3>Neverness to Everness — v1.5 starts 11 Nov 2026</h3>
-<p class="note">Elyms (Phase 1, 11 Nov–2 Dec) • Exe (Phase 2, 2–23 Dec) • S 0.99% community model, soft pity 70, hard pity 90, no 50/50, 160 Annulith/pull.</p>
+<p class="note">Elyms (Phase 1, 11 Nov–2 Dec) • Exe (Phase 2, 2–23 Dec) • S 0.99% community model, soft pity from pull 71, hard pity 90, no 50/50, 160 Annulith/pull.</p>
 <button id="nte1">Pull ×1 (NTE)</button><button id="nte10">Pull ×10 (NTE)</button>
 <h3>Zenless Zone Zero — v3.3 Phase 2 from 11 Nov 2026</h3>
 <p class="note">Severian (11 Nov–1 Dec) • S 0.6% official, soft pity ~74 (community), hard pity 90, 50/50, 160 Polychrome/pull.</p>
@@ -92,14 +99,14 @@
 <script type="module">
 import { pullOnce, NTE, ZZZ } from './src/gacha.js';
 const out = document.getElementById('out');
-let pity = { NTE: 0, ZZZ: 0 }, total = { NTE: 0, ZZZ: 0 }, sCount = { NTE: 0, ZZZ: 0 };
+let pity = { NTE: 0, ZZZ: 0 }, pityA = { NTE: 0, ZZZ: 0 }, total = { NTE: 0, ZZZ: 0 }, sCount = { NTE: 0, ZZZ: 0 };
 function doPulls(game, n) {
   const cfg = game === 'NTE' ? NTE : ZZZ;
   const results = [];
   for (let i = 0; i < n; i++) {
-    const r = pullOnce(game, pity[game]);
+    const r = pullOnce(game, pity[game], Math.random, pityA[game]);
     results.push(r); total[game]++;
-    if (r === 'S') { pity[game] = 0; sCount[game]++; } else pity[game]++;
+    if (r === 'S') { pity[game] = 0; sCount[game]++; pityA[game] = 0; } else { pity[game]++; pityA[game] = 0; }
   }
   out.textContent = `${game}: ${results.join(' ')}  |  pulls: ${total[game]}, S: ${sCount[game]}, pity now: ${pity[game]}, cost: ${total[game] * cfg.costPerPull} ${cfg.currency}`;
 }

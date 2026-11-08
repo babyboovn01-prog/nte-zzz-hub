@@ -11,11 +11,17 @@
 <meta property="og:description" content="Simulate Neverness to Everness Scarborough Fair pulls for v1.5: Elyms Phase 1 and Exe Phase 2. Community-modelled rates, hard pity 90, no 50/50.">
 <meta property="og:url" content="https://babyboovn01-prog.github.io/nte-zzz-hub/nte-simulator.html">
 <meta property="og:site_name" content="PityHub">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://babyboovn01-prog.github.io/nte-zzz-hub/assets/og.png">
+<meta property="og:image:alt" content="PityHub — NTE + ZZZ gacha tools hub">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="NTE Wish Simulator — Elyms &amp; Exe v1.5">
 <meta name="twitter:description" content="Simulate Neverness to Everness Scarborough Fair pulls for v1.5: Elyms Phase 1 and Exe Phase 2. Community-modelled rates, hard pity 90, no 50/50.">
+<meta name="twitter:image" content="https://babyboovn01-prog.github.io/nte-zzz-hub/assets/og.png">
 <link rel="stylesheet" href="assets/style.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"PityHub","url":"https://babyboovn01-prog.github.io/nte-zzz-hub/","description":"Free gacha tools for Neverness to Everness and Zenless Zone Zero."}</script>
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "name": "NTE Wish Simulator — Elyms & Exe v1.5", "description": "Simulate Neverness to Everness Scarborough Fair pulls for v1.5: Elyms Phase 1 and Exe Phase 2. Community-modelled rates, hard pity 90, no 50/50.", "url": "https://babyboovn01-prog.github.io/nte-zzz-hub/nte-simulator.html", "isPartOf": {"@type": "WebSite", "name": "PityHub", "url": "https://babyboovn01-prog.github.io/nte-zzz-hub/"}}</script>
 </head>
 <body>
 <header class="site"><div class="wrap"><a class="brand" href="index.html">PityHub</a><button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle navigation menu">&#9776;</button><nav id="site-nav">
@@ -38,10 +44,11 @@
 <a href="tier-list.html#zzz">ZZZ Tier List</a>
 <a href="codes.html#zzz">ZZZ Codes</a>
 </div></details>
-<a href="damage-calculator.html">Damage Calc</a>
+<a href="damage-calculator.html">Damage Calculator</a>
 <a href="banner-schedule.html">Banners</a>
 </nav><span class="navnote">More games coming soon</span></div></header>
 <main>
+<noscript><p class="warn">This page needs JavaScript enabled: the databases, simulators and calculators render in your browser. Please enable JavaScript and reload.</p></noscript>
 <h1>NTE Wish Simulator — v1.5</h1>
 <p>Simulate the Scarborough Fair character banner. Current banners: <strong>Phase 1 “Android Dreams” — <span class="tip-name" data-tip-name="Elyms" data-tip-kind="char" data-tip-game="NTE">Elyms</span></strong> (S / Cosmos / Solid), 11 Nov–2 Dec 2026, and <strong>Phase 2 “Offline Equations” — <span class="tip-name" data-tip-name="Exe" data-tip-kind="char" data-tip-game="NTE">Exe</span></strong> (S / Chaos / Plasma), 2–23 Dec 2026. Reruns: <span class="tip-name" data-tip-name="Shinku" data-tip-kind="char" data-tip-game="NTE">Shinku</span> (Phase 1), <span class="tip-name" data-tip-name="Chaos" data-tip-kind="char" data-tip-game="NTE">Chaos</span> (Phase 2).</p>
 <div class="warn"><strong>Rates are community-modelled / UNVERIFIED.</strong> No official Hotta / Perfect World rate sheet was found. Model used: S base 0.99% (pulls 1–70), 19.59% flat on pulls 71–89, hard pity 90. Base rate is disputed (0.6% in a CBT-era table vs 0.99% in the current community model). No 50/50 on limited character banners — any S pulled is the featured character. Pity is shared across limited boards. A-rank or higher guaranteed every 10 pulls. 160 Annulith per pull.</div>
@@ -50,8 +57,8 @@
 <select id="banner"><option value="Elyms">Phase 1 — Elyms (11 Nov–2 Dec)</option><option value="Exe">Phase 2 — Exe (2–23 Dec)</option></select>
 <button id="p1">Pull ×1</button><button id="p10">Pull ×10</button><button id="reset" class="ghost">Reset session</button>
 <p class="result" id="stats">Pulls: 0 &nbsp;•&nbsp; S pulled: 0 &nbsp;•&nbsp; Pity: 0 &nbsp;•&nbsp; Spent: 0 Annulith</p>
-<pre id="log">Press Pull to start. Each line is one 10-pull or single pull; S = S-rank, A = non-S (A-rank or lower in this simplified model).</pre>
-<p class="note">Worst case for a featured S: 90 pulls = 14,400 Annulith. Character + signature Arc worst case: 170 pulls = 27,200 Annulith (Arc hard pity 80 pulls). See the <a href="pity-tracker.html">Pity Tracker</a> for exact odds at your current pity.</p>
+<pre id="log">Press Pull to start. Each line is one 10-pull or single pull; S = S-rank, A = non-S pull (A-rank or higher in this simplified model; B-ranks are not modelled).</pre>
+<p class="note">Average: ≈ 53.2 pulls per S (community model, unverified). Worst case for a featured S: 90 pulls = 14,400 Annulith. Character + signature Arc worst case: 170 pulls = 27,200 Annulith (Arc hard pity 80 pulls). See the <a href="pity-tracker.html">Pity Tracker</a> for exact odds at your current pity.</p>
 </div>
 </main>
 <footer>PityHub — NTE + ZZZ Hub. Rates community-modelled, unverified. Data checked 8 Nov 2026. Not affiliated with Hotta Studio / Perfect World. Character/item artwork © HoYoverse / Hotta Studio &amp; Perfect World. <nav class="footnav"><a href="about.html">About</a> &middot; <a href="privacy.html">Privacy</a> &middot; <a href="contact.html">Contact</a></nav></footer>
@@ -60,7 +67,7 @@ import { pullOnce, NTE } from './src/gacha.js';
 import { initTooltips } from './src/tooltip.js';
 initTooltips();
 const log = document.getElementById('log'), stats = document.getElementById('stats'), banner = document.getElementById('banner');
-let pity = 0, total = 0, s = 0;
+let pity = 0, pityA = 0, total = 0, s = 0; // pityA: pulls since last A-rank or higher (10-pull A floor)
 function render(res) {
   stats.textContent = `Pulls: ${total}  •  S pulled: ${s}  •  Pity: ${pity}  •  Spent: ${total * NTE.costPerPull} Annulith`;
   if (res) log.textContent = `${banner.value}: ${res.join(' ')}\n` + (log.textContent.startsWith('Press') ? '' : log.textContent);
@@ -68,14 +75,14 @@ function render(res) {
 function doPulls(n) {
   const res = [];
   for (let i = 0; i < n; i++) {
-    const r = pullOnce('NTE', pity); res.push(r); total++;
-    if (r === 'S') { pity = 0; s++; } else pity++;
+    const r = pullOnce('NTE', pity, Math.random, pityA); res.push(r); total++;
+    if (r === 'S') { pity = 0; pityA = 0; s++; } else { pity++; pityA = 0; }
   }
   render(res);
 }
 document.getElementById('p1').onclick = () => doPulls(1);
 document.getElementById('p10').onclick = () => doPulls(10);
-document.getElementById('reset').onclick = () => { pity = 0; total = 0; s = 0; log.textContent = 'Session reset. Press Pull to start.'; render(); };
+document.getElementById('reset').onclick = () => { pity = 0; pityA = 0; total = 0; s = 0; log.textContent = 'Session reset. Press Pull to start.'; render(); };
 </script>
 <script src="src/nav.js" defer></script>
 </body>

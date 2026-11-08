@@ -11,11 +11,17 @@
 <meta property="og:description" content="Simulate Zenless Zone Zero Signal Search for v3.3 Phase 2: Severian. Official rates: S 0.6%, hard pity 90, 50/50. Soft pity is community-measured.">
 <meta property="og:url" content="https://babyboovn01-prog.github.io/nte-zzz-hub/zzz-simulator.html">
 <meta property="og:site_name" content="PityHub">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://babyboovn01-prog.github.io/nte-zzz-hub/assets/og.png">
+<meta property="og:image:alt" content="PityHub — NTE + ZZZ gacha tools hub">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="ZZZ Wish Simulator — Severian v3.3">
 <meta name="twitter:description" content="Simulate Zenless Zone Zero Signal Search for v3.3 Phase 2: Severian. Official rates: S 0.6%, hard pity 90, 50/50. Soft pity is community-measured.">
+<meta name="twitter:image" content="https://babyboovn01-prog.github.io/nte-zzz-hub/assets/og.png">
 <link rel="stylesheet" href="assets/style.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"PityHub","url":"https://babyboovn01-prog.github.io/nte-zzz-hub/","description":"Free gacha tools for Neverness to Everness and Zenless Zone Zero."}</script>
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "name": "ZZZ Wish Simulator — Severian v3.3", "description": "Simulate Zenless Zone Zero Signal Search for v3.3 Phase 2: Severian. Official rates: S 0.6%, hard pity 90, 50/50. Soft pity is community-measured.", "url": "https://babyboovn01-prog.github.io/nte-zzz-hub/zzz-simulator.html", "isPartOf": {"@type": "WebSite", "name": "PityHub", "url": "https://babyboovn01-prog.github.io/nte-zzz-hub/"}}</script>
 </head>
 <body>
 <header class="site"><div class="wrap"><a class="brand" href="index.html">PityHub</a><button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle navigation menu">&#9776;</button><nav id="site-nav">
@@ -38,48 +44,66 @@
 <a href="tier-list.html#zzz">ZZZ Tier List</a>
 <a href="codes.html#zzz">ZZZ Codes</a>
 </div></details>
-<a href="damage-calculator.html">Damage Calc</a>
+<a href="damage-calculator.html">Damage Calculator</a>
 <a href="banner-schedule.html">Banners</a>
 </nav><span class="navnote">More games coming soon</span></div></header>
 <main>
+<noscript><p class="warn">This page needs JavaScript enabled: the databases, simulators and calculators render in your browser. Please enable JavaScript and reload.</p></noscript>
 <h1>ZZZ Wish Simulator — v3.3 Phase 2</h1>
 <p>Simulate the Exclusive Channel (Signal Search). Current banner: <strong>“Answers in the Wind” — <span class="tip-name" data-tip-name="Severian Lowell" data-tip-kind="char" data-tip-game="ZZZ">Severian Lowell</span></strong> (S / Wind / Attack), 11 Nov 12:00 – 1 Dec 14:59 server time. Rerun: <span class="tip-name" data-tip-name="Norma Hollowell" data-tip-kind="char" data-tip-game="ZZZ">Norma Hollowell</span> (S / Fire / Stun). W-Engines: <span class="tip-name" data-tip-name="Incarcerating Grip" data-tip-kind="w">Incarcerating Grip</span> (new), <span class="tip-name" data-tip-name="Chief Sidekick" data-tip-kind="w">Chief Sidekick</span> (rerun).</p>
-<div class="warn"><strong>Rates:</strong> S base 0.6% / 1.6% consolidated and hard pity 90 are from the in-game Signal Search Details screen (HoYoverse). <strong>Soft pity is community-measured, not published by HoYoverse:</strong> ramp from pull 74, +6% per pull (sources differ 74 vs 75). 50/50 applies — lose it once and the next S is guaranteed featured. A-rank or higher at least once per 10 searches. 160 Polychrome per search.</div>
+<div class="warn"><strong>Rates:</strong> S base 0.6% / 1.6% consolidated and hard pity 90 are from the in-game Signal Search Details screen (HoYoverse). <strong>Soft pity is community-measured, not published by HoYoverse:</strong> ramp from pull 74, +6% per pull (GachaPity model; sources differ 74 vs 75). 50/50 applies — lose it once and the next S is guaranteed featured. A-rank or higher at least once per 10 pulls. 160 Polychrome per pull. <strong>W-Engine channel:</strong> S base 1.0% / consolidated 2.0% (official), hard pity 80, 75/25. Soft pity is community-estimated to start at pull 64–65 — no verified ramp step is published, so this simulator uses the official 1.0% base rate until hard pity.</div>
 <div class="card">
+<label for="channel">Channel</label>
+<select id="channel"><option value="agent">Agent — Exclusive Channel (Severian / Phoenix)</option><option value="wengine">W-Engine — W-Engine Channel (Incarcerating Grip / Chief Sidekick)</option></select>
 <label for="banner">Banner</label>
 <select id="banner"><option value="Severian">Phase 2 — Severian (11 Nov–1 Dec)</option><option value="Phoenix">Phase 1 — Phoenix (ends 11 Nov 11:59)</option></select>
 <button id="p1">Pull ×1</button><button id="p10">Pull ×10</button><button id="reset" class="ghost">Reset session</button>
 <p class="result" id="stats">Pulls: 0 &nbsp;•&nbsp; S pulled: 0 &nbsp;•&nbsp; Featured won: 0 &nbsp;•&nbsp; 50/50 lost: 0 &nbsp;•&nbsp; Pity: 0 &nbsp;•&nbsp; Spent: 0 Polychrome</p>
-<pre id="log">Press Pull to start. S★ = featured S (won 50/50 or guaranteed), S = off-banner S (lost 50/50), A = non-S.</pre>
-<p class="note">Worst case for a featured Agent: 180 pulls = 28,800 Polychrome. Guaranteed S (any): 90 pulls = 14,400 Polychrome. See the <a href="pity-tracker.html">Pity Tracker</a> for exact odds at your current pity.</p>
+<pre id="log">Press Pull to start. S★ = featured S (won the 50/50 or 75/25, or guaranteed), S = off-banner S (lost the 50/50 or 75/25), A = non-S pull (A-rank or higher in this simplified model; B-ranks are not modelled).</pre>
+<p class="note">Worst case for a featured Agent: 180 pulls = 28,800 Polychrome. Worst case for a featured W-Engine: 160 pulls = 25,600 Polychrome (lose the 75/25 once). Guaranteed S (any): 90 pulls = 14,400 Polychrome. Median: 76 pulls to an Agent S (community-measured). See the <a href="pity-tracker.html">Pity Tracker</a> for exact odds at your current pity.</p>
 </div>
 </main>
 <footer>PityHub — NTE + ZZZ Hub. Data checked 8 Nov 2026. Not affiliated with HoYoverse. Character/item artwork © HoYoverse / Hotta Studio &amp; Perfect World. <nav class="footnav"><a href="about.html">About</a> &middot; <a href="privacy.html">Privacy</a> &middot; <a href="contact.html">Contact</a></nav></footer>
 <script type="module">
-import { pullOnce, ZZZ } from './src/gacha.js';
+import { pullOnce, zzzWengineRate, ZZZ, ZZZ_WENGINE } from './src/gacha.js';
 import { initTooltips } from './src/tooltip.js';
 initTooltips();
-const log = document.getElementById('log'), stats = document.getElementById('stats'), banner = document.getElementById('banner');
-let pity = 0, total = 0, s = 0, won = 0, lost = 0, guaranteed = false;
+const log = document.getElementById('log'), stats = document.getElementById('stats'), banner = document.getElementById('banner'), channelEl = document.getElementById('channel');
+// Pity is tracked per channel (Agent and W-Engine channels have separate pity).
+// pityA tracks pulls since the last A-rank or higher (the 10-pull A floor);
+// every non-S pull in this model is an A-rank, so it resets on every pull.
+let pity = 0, pityW = 0, pityA = 0, pityAW = 0, total = 0, s = 0, won = 0, lost = 0, guaranteed = false, guaranteedW = false;
 function render(res) {
-  stats.textContent = `Pulls: ${total}  •  S pulled: ${s}  •  Featured won: ${won}  •  50/50 lost: ${lost}  •  Pity: ${pity}  •  Spent: ${total * ZZZ.costPerPull} Polychrome`;
-  if (res) log.textContent = `${banner.value}: ${res.join(' ')}\n` + (log.textContent.startsWith('Press') ? '' : log.textContent);
+  const pityNow = channelEl.value === 'wengine' ? pityW : pity;
+  stats.textContent = `Pulls: ${total}  •  S pulled: ${s}  •  Featured won: ${won}  •  50/50 or 75/25 lost: ${lost}  •  Pity: ${pityNow}  •  Spent: ${total * ZZZ.costPerPull} Polychrome`;
+  if (res) log.textContent = `${channelEl.value === 'wengine' ? 'W-Engine' : banner.value}: ${res.join(' ')}
+` + (log.textContent.startsWith('Press') ? '' : log.textContent);
 }
 function doPulls(n) {
   const res = [];
+  const isW = channelEl.value === 'wengine';
   for (let i = 0; i < n; i++) {
-    const r = pullOnce('ZZZ', pity); total++;
-    if (r === 'S') {
-      pity = 0; s++;
-      if (guaranteed || Math.random() < 0.5) { res.push('S★'); won++; guaranteed = false; }
-      else { res.push('S'); lost++; guaranteed = true; }
-    } else { pity++; res.push('A'); }
+    total++;
+    if (isW) {
+      if (Math.random() < zzzWengineRate(pityW)) {
+        pityW = 0; pityAW = 0; s++;
+        if (guaranteedW || Math.random() < ZZZ_WENGINE.featuredChance) { res.push('S★'); won++; guaranteedW = false; }
+        else { res.push('S'); lost++; guaranteedW = true; }
+      } else { pityW++; pityAW = 0; res.push('A'); }
+    } else {
+      const r = pullOnce('ZZZ', pity, Math.random, pityA);
+      if (r === 'S') {
+        pity = 0; pityA = 0; s++;
+        if (guaranteed || Math.random() < 0.5) { res.push('S★'); won++; guaranteed = false; }
+        else { res.push('S'); lost++; guaranteed = true; }
+      } else { pity++; pityA = 0; res.push('A'); }
+    }
   }
   render(res);
 }
 document.getElementById('p1').onclick = () => doPulls(1);
 document.getElementById('p10').onclick = () => doPulls(10);
-document.getElementById('reset').onclick = () => { pity = 0; total = 0; s = 0; won = 0; lost = 0; guaranteed = false; log.textContent = 'Session reset. Press Pull to start.'; render(); };
+document.getElementById('reset').onclick = () => { pity = 0; pityW = 0; pityA = 0; pityAW = 0; total = 0; s = 0; won = 0; lost = 0; guaranteed = false; guaranteedW = false; log.textContent = 'Session reset. Press Pull to start.'; render(); };
 </script>
 <script src="src/nav.js" defer></script>
 </body>

@@ -11,11 +11,17 @@
 <meta property="og:description" content="Community tier list snapshot for Zenless Zone Zero v3.3 and Neverness to Everness v1.5, dated 8 Nov 2026. Not official — community only.">
 <meta property="og:url" content="https://babyboovn01-prog.github.io/nte-zzz-hub/tier-list.html">
 <meta property="og:site_name" content="PityHub">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://babyboovn01-prog.github.io/nte-zzz-hub/assets/og.png">
+<meta property="og:image:alt" content="PityHub — NTE + ZZZ gacha tools hub">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Tier Lists — ZZZ v3.3 &amp; NTE v1.5 (8 Nov 2026)">
 <meta name="twitter:description" content="Community tier list snapshot for Zenless Zone Zero v3.3 and Neverness to Everness v1.5, dated 8 Nov 2026. Not official — community only.">
+<meta name="twitter:image" content="https://babyboovn01-prog.github.io/nte-zzz-hub/assets/og.png">
 <link rel="stylesheet" href="assets/style.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"PityHub","url":"https://babyboovn01-prog.github.io/nte-zzz-hub/","description":"Free gacha tools for Neverness to Everness and Zenless Zone Zero."}</script>
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "name": "Tier Lists — ZZZ v3.3 & NTE v1.5 (8 Nov 2026)", "description": "Community tier list snapshot for Zenless Zone Zero v3.3 and Neverness to Everness v1.5, dated 8 Nov 2026. Not official — community only.", "url": "https://babyboovn01-prog.github.io/nte-zzz-hub/tier-list.html", "isPartOf": {"@type": "WebSite", "name": "PityHub", "url": "https://babyboovn01-prog.github.io/nte-zzz-hub/"}}</script>
 </head>
 <body>
 <header class="site"><div class="wrap"><a class="brand" href="index.html">PityHub</a><button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle navigation menu">&#9776;</button><nav id="site-nav">
@@ -38,17 +44,18 @@
 <a href="tier-list.html#zzz">ZZZ Tier List</a>
 <a href="codes.html#zzz">ZZZ Codes</a>
 </div></details>
-<a href="damage-calculator.html">Damage Calc</a>
+<a href="damage-calculator.html">Damage Calculator</a>
 <a href="banner-schedule.html">Banners</a>
 </nav><span class="navnote">More games coming soon</span></div></header>
 <main>
+<noscript><p class="warn">This page needs JavaScript enabled: the databases, simulators and calculators render in your browser. Please enable JavaScript and reload.</p></noscript>
 <h1>Tier Lists — Community Snapshot</h1>
 <p><strong>Snapshot date: 8 Nov 2026.</strong> HoYoverse and Hotta / Perfect World publish no official tier lists. Everything below is a community ranking — treat it as a guide, not a fact, and re-check after the 11 Nov launches. Hover over (or tap) any row to see a large image + stats.</p>
 
 <h2 id="zzz">Zenless Zone Zero — v3.3 (TimeSaver, updated 1 Nov 2026)</h2>
-<p>Source: TimeSaver Nov 2026 tier list, using Prydwen's public usage dataset (snapshot 25 Oct 2026). Phoenix is S+ (30.2% Deadly Assault usage in her first cycle, ~94% of runs with Velina). Full S/A/B rows are not reproduced here; see the linked TimeSaver list for the complete ranking.</p>
+<p>Source: TimeSaver Nov 2026 tier list, using Prydwen's public usage dataset (snapshot 25 Oct 2026). Phoenix is S+ (30.2% Deadly Assault usage in her first cycle, ~94% of runs with Velina). Full S/A/B rows are not reproduced here; see the <a href="https://timesaver.gg/blog/zzz-tier-list-september-2026">TimeSaver Nov 2026 tier list</a> for the complete ranking.</p>
 <div class="table-wrap"><table><thead><tr><th>Icon</th><th>Character</th><th>Tier</th><th>Rank</th><th>Attribute</th><th>Role</th><th>Status</th></tr></thead><tbody id="zzzTierRows"></tbody></table></div>
-<p class="note">Prydwen's ZZZ tier list was last updated 19 Aug 2026 as of the Sep 2026 comparison — verify live before citing it as current. This page is re-ranked within 24–48h of each patch / banner.</p>
+<p class="note">Prydwen's ZZZ tier list was last updated 19 Aug 2026 (checked Sep 2026) — verify it live before citing it. This page is re-ranked within 24–48h of each patch/banner.</p>
 
 <h2 id="nte">Neverness to Everness — v1.5</h2>
 <p>No single verified NTE tier snapshot is published. The reference community lists (Prydwen, Game8, Icy Veins) were last updated Oct–5 Nov 2026 for v1.4 (24 characters). The sources agree on two groups — the standard-pool S-ranks that form the free-to-play backbone, and the limited Main DPS units that lead damage rankings — but they do <strong>not</strong> agree on a precise S+/S/A split, so this table uses one honest tier value, <strong>“Top (v1.4 consensus)”</strong>, for all twelve instead of inventing a split. This page will carry a full versioned, role-split NTE tier list once v1.5 launch data lands on 11 Nov.</p>
@@ -88,7 +95,7 @@ const badge = t => t === 'S+' ? '<span class="tier tier-splus">S+</span>' : t ==
 document.getElementById('zzzTierRows').innerHTML = ZZZ_TIERS.map(([tier, shortName]) => {
   const name = ZZZ_NAME_ALIASES[shortName] || shortName;
   const r = zzzByName[name];
-  if (!r) return `<tr data-prev-name="${esc(name)}" data-prev-kind="char" data-prev-game="ZZZ" data-prev-img="" data-prev-big="" data-prev-ph="No image yet"><td><span class="thumb-ph">No image yet</span></td><td data-tip-name="${esc(name)}" data-tip-kind="char" data-tip-game="ZZZ">${esc(name)}</td><td>${badge(tier)}</td><td>—</td><td>—</td><td>—</td><td>Not in PityHub roster — see TimeSaver list</td></tr>`;
+  if (!r) return `<tr data-prev-name="${esc(name)}" data-prev-kind="char" data-prev-game="ZZZ" data-prev-img="" data-prev-big="" data-prev-ph="No image yet"><td><span class="thumb-ph">No image yet</span></td><td data-tip-name="${esc(name)}" data-tip-kind="char" data-tip-game="ZZZ">${esc(name)}</td><td>${badge(tier)}</td><td>—</td><td>—</td><td>—</td><td>Not in PityHub roster — see the TimeSaver Nov 2026 list (linked above)</td></tr>`;
   const status = tier === 'Unranked' ? 'Unranked until playable (11 Nov)' : (r[6] > '2026-11-08' ? 'From 11 Nov 2026' : 'Live');
   return `<tr data-prev-name="${esc(name)}" data-prev-kind="char" data-prev-game="ZZZ" data-prev-img="${ZZZ_AGENT_IMG[name] || ''}" data-prev-big="${ZZZ_AGENT_BIG[name] || ''}" data-prev-ph="No image yet"><td>${imgCell(ZZZ_AGENT_IMG[name], name, 'No image yet')}</td><td data-tip-name="${esc(name)}" data-tip-kind="char" data-tip-game="ZZZ">${esc(name)}</td><td>${badge(tier)}</td><td>${r[1]}</td><td>${esc(r[2])}</td><td>${esc(r[3])}</td><td>${status}</td></tr>`;
 }).join('');

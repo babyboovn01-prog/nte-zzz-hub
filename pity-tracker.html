@@ -11,11 +11,17 @@
 <meta property="og:description" content="Enter your current pity and see your exact odds of pulling an S-rank in NTE and ZZZ, with cost in Annulith and Polychrome.">
 <meta property="og:url" content="https://babyboovn01-prog.github.io/nte-zzz-hub/pity-tracker.html">
 <meta property="og:site_name" content="PityHub">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://babyboovn01-prog.github.io/nte-zzz-hub/assets/og.png">
+<meta property="og:image:alt" content="PityHub — NTE + ZZZ gacha tools hub">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Pity Tracker &amp; Calculator — NTE &amp; ZZZ Odds">
 <meta name="twitter:description" content="Enter your current pity and see your exact odds of pulling an S-rank in NTE and ZZZ, with cost in Annulith and Polychrome.">
+<meta name="twitter:image" content="https://babyboovn01-prog.github.io/nte-zzz-hub/assets/og.png">
 <link rel="stylesheet" href="assets/style.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"PityHub","url":"https://babyboovn01-prog.github.io/nte-zzz-hub/","description":"Free gacha tools for Neverness to Everness and Zenless Zone Zero."}</script>
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "name": "Pity Tracker & Calculator — NTE & ZZZ Odds", "description": "Enter your current pity and see your exact odds of pulling an S-rank in NTE and ZZZ, with cost in Annulith and Polychrome.", "url": "https://babyboovn01-prog.github.io/nte-zzz-hub/pity-tracker.html", "isPartOf": {"@type": "WebSite", "name": "PityHub", "url": "https://babyboovn01-prog.github.io/nte-zzz-hub/"}}</script>
 </head>
 <body>
 <header class="site"><div class="wrap"><a class="brand" href="index.html">PityHub</a><button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle navigation menu">&#9776;</button><nav id="site-nav">
@@ -38,20 +44,23 @@
 <a href="tier-list.html#zzz">ZZZ Tier List</a>
 <a href="codes.html#zzz">ZZZ Codes</a>
 </div></details>
-<a href="damage-calculator.html">Damage Calc</a>
+<a href="damage-calculator.html">Damage Calculator</a>
 <a href="banner-schedule.html">Banners</a>
 </nav><span class="navnote">More games coming soon</span></div></header>
 <main>
+<noscript><p class="warn">This page needs JavaScript enabled: the databases, simulators and calculators render in your browser. Please enable JavaScript and reload.</p></noscript>
 <h1>Pity Tracker &amp; Calculator</h1>
-<p>Enter your current pity (pulls since your last S-rank) and how many pulls you plan to do. Odds are computed exactly from the per-pull rates in <code>src/gacha.js</code> — no simulation, no guessing.</p>
-<div class="warn"><strong>NTE rates are community-modelled / UNVERIFIED</strong> (no official Hotta / Perfect World rate sheet). ZZZ S base 0.6% and hard pity 90 are official (in-game Details screen); ZZZ soft pity (ramp from pull 74, +6%/pull) is community-measured — sources differ 74 vs 75.</div>
+<p>Enter your current pity (pulls since your last S-rank) and how many pulls you plan to do. Odds are computed exactly from the per-pull rates below — no simulation, no guessing.</p>
+<div class="warn"><strong>NTE rates are community-modelled / UNVERIFIED</strong> (no official Hotta / Perfect World rate sheet). ZZZ S base 0.6% and hard pity 90 are official (in-game Details screen); ZZZ soft pity (ramp from pull 74, +6%/pull, GachaPity model) is community-measured — sources differ 74 vs 75.</div>
 <div class="tabs"><button id="tabNTE" class="active">Neverness to Everness</button><button id="tabZZZ">Zenless Zone Zero</button></div>
 <div class="card">
-<label for="pity">Current pity (pulls since last S, 0–89)</label>
+<label for="pity">Current pity (pulls since last S, 0–89; 0–79 on the W-Engine channel)</label>
 <input id="pity" type="number" min="0" max="89" value="0">
-<label for="pulls">Pulls you plan to do (1–180)</label>
-<input id="pulls" type="number" min="1" max="180" value="10">
-<div id="guaranteeBox" style="display:none"><label><input type="checkbox" id="guaranteed" style="width:auto"> I lost my last 50/50 — my next S is guaranteed featured (ZZZ only)</label></div>
+<label for="pulls">Pulls you plan to do (1–340)</label>
+<input id="pulls" type="number" min="1" max="340" value="10">
+<div id="guaranteeBox" style="display:none"><label><input type="checkbox" id="guaranteed" style="width:auto"> I lost my last 50/50 (Agent) / 75/25 (W-Engine) — my next S is guaranteed featured (ZZZ only)</label></div>
+<div id="targetBox" style="display:none"><label for="target">Target (ZZZ only)</label>
+<select id="target"><option value="agent">Featured Agent — S base 0.6%, hard pity 90, 50/50</option><option value="wengine">Featured W-Engine — S base 1.0%, hard pity 80, 75/25</option></select></div>
 <button id="calc">Calculate odds</button>
 <button id="save" class="ghost">Save my pity (this browser)</button>
 <div id="out" style="margin-top:1rem"></div>
@@ -63,37 +72,47 @@
 <tr><td>Featured S-rank (worst case)</td><td>90 pulls · 14,400 Annulith (no 50/50)</td><td>180 pulls · 28,800 Polychrome (lose 50/50 once)</td></tr>
 <tr><td>Featured + signature weapon</td><td>170 pulls · 27,200 Annulith (Arc hard pity 80)</td><td>340 pulls · 54,400 Polychrome (W-Engine worst 160)</td></tr>
 </table></div>
-<p class="note">NTE pity is shared across limited character boards; ZZZ pity carries over between banners of the same channel type, and the 50/50 guarantee carries over too.</p></div>
+<p class="note">NTE pity is shared across limited character boards; ZZZ pity carries over between banners of the same channel type, and the 50/50 guarantee carries over too.</p>
+<p class="note"><strong>W-Engine channel (ZZZ):</strong> S base 1.0% / consolidated 2.0% (official, in-game Details screen), hard pity 80, 75/25 — worst case 160 pulls = 25,600 Polychrome. Soft pity is community-estimated to start at pull 64–65, but no verified per-pull ramp step has been published, so this calculator uses the official 1.0% base rate until hard pity; that slightly understates the odds in pulls 64–79.</p>
+<p class="note"><strong>Averages (community models):</strong> NTE ≈ 53.2 pulls per S-rank; ZZZ Agent median 76 pulls to S. Averages describe the typical pull, not your next one — hard pity is what guarantees it.</p></div>
 </main>
 <footer>PityHub — NTE + ZZZ Hub. Data checked 8 Nov 2026. Not affiliated with Hotta Studio, Perfect World, or HoYoverse. Character/item artwork © HoYoverse / Hotta Studio &amp; Perfect World. <nav class="footnav"><a href="about.html">About</a> &middot; <a href="privacy.html">Privacy</a> &middot; <a href="contact.html">Contact</a></nav></footer>
 <script type="module">
-import { ntePullRate, zzzPullRate, NTE, ZZZ } from './src/gacha.js';
+import { ntePullRate, zzzPullRate, zzzWengineRate, NTE, ZZZ, ZZZ_WENGINE } from './src/gacha.js';
 let game = 'NTE';
 const pityEl = document.getElementById('pity'), pullsEl = document.getElementById('pulls'), out = document.getElementById('out');
-const tabNTE = document.getElementById('tabNTE'), tabZZZ = document.getElementById('tabZZZ'), gBox = document.getElementById('guaranteeBox');
+const tabNTE = document.getElementById('tabNTE'), tabZZZ = document.getElementById('tabZZZ'), gBox = document.getElementById('guaranteeBox'), tBox = document.getElementById('targetBox'), targetEl = document.getElementById('target');
+const isWengine = () => game === 'ZZZ' && targetEl.value === 'wengine';
 function setGame(g) {
   game = g;
   tabNTE.classList.toggle('active', g === 'NTE');
   tabZZZ.classList.toggle('active', g === 'ZZZ');
   gBox.style.display = g === 'ZZZ' ? 'block' : 'none';
+  tBox.style.display = g === 'ZZZ' ? 'block' : 'none';
+  pityEl.max = isWengine() ? 79 : 89;
   const saved = localStorage.getItem('pity-' + g);
   if (saved !== null) pityEl.value = saved;
   out.innerHTML = '';
 }
 tabNTE.onclick = () => setGame('NTE');
 tabZZZ.onclick = () => setGame('ZZZ');
+targetEl.onchange = () => { pityEl.max = isWengine() ? 79 : 89; out.innerHTML = ''; };
 const _g = new URLSearchParams(location.search).get('game');
 if (_g === 'zzz') setGame('ZZZ');
-if (_g === 'nte') setGame('NTE');
+else if (_g === 'nte') setGame('NTE');
+else setGame('NTE'); // default tab when no ?game= param is given
 document.getElementById('save').onclick = () => {
   localStorage.setItem('pity-' + game, pityEl.value);
   out.innerHTML = `<p class="note">Saved: ${game} pity = ${pityEl.value} in this browser.</p>`;
 };
 document.getElementById('calc').onclick = () => {
   const cfg = game === 'NTE' ? NTE : ZZZ;
-  const rate = game === 'NTE' ? ntePullRate : zzzPullRate;
-  let p0 = Math.max(0, Math.min(89, parseInt(pityEl.value) || 0));
-  let n = Math.max(1, Math.min(180, parseInt(pullsEl.value) || 10));
+  const isW = isWengine();
+  const hp = isW ? ZZZ_WENGINE.hardPity : 90; // hard pity: 80 on W-Engine, 90 otherwise
+  const rate = isW ? zzzWengineRate : (game === 'NTE' ? ntePullRate : zzzPullRate);
+  const targetName = isW ? 'featured S W-Engine' : 'featured S';
+  let p0 = Math.max(0, Math.min(hp - 1, parseInt(pityEl.value) || 0));
+  let n = Math.max(1, Math.min(340, parseInt(pullsEl.value) || 10));
   // Exact DP: dist[pity][guaranteed][gotFeatured] — for NTE, guaranteed is always true (no 50/50).
   let dist = {};
   const startG = game === 'ZZZ' ? (document.getElementById('guaranteed').checked ? 1 : 0) : 1;
@@ -105,13 +124,13 @@ document.getElementById('calc').onclick = () => {
       const pr = dist[key];
       const r = rate(p);
       // S pulled: winning the featured resets the guarantee; losing it (ZZZ only) guarantees the next S is featured.
-      const featProb = game === 'NTE' ? 1 : (g ? 1 : 0.5);
+      const featProb = game === 'NTE' ? 1 : (g ? 1 : (isW ? 0.75 : 0.5));
       const winKey = `0,${game === 'ZZZ' ? 0 : 1},1`;
       const loseKey = `0,1,${f}`;
       next[winKey] = (next[winKey] || 0) + pr * r * featProb;
       if (1 - featProb > 0) next[loseKey] = (next[loseKey] || 0) + pr * r * (1 - featProb);
-      // No S: pity +1 (capped 89; hard pity at 89 forces S next pull via rate=1)
-      const np = Math.min(89, p + 1);
+      // No S: pity +1 (capped hp-1; hard pity at hp-1 forces S next pull via rate=1)
+      const np = Math.min(hp - 1, p + 1);
       const nKey = `${np},${g},${f}`;
       next[nKey] = (next[nKey] || 0) + pr * (1 - r);
     }
@@ -121,8 +140,8 @@ document.getElementById('calc').onclick = () => {
   // P(any S) from the survival product below (exact, independent of the DP above).
   // P(any S): 1 - product of (1 - rate) over the planned pulls.
   let surv = 1, expPulls = 0, cumNoS = 1;
-  for (let i = 0; i < 90; i++) {
-    const r = rate(Math.min(89, p0 + i));
+  for (let i = 0; i < hp; i++) {
+    const r = rate(Math.min(hp - 1, p0 + i));
     expPulls += cumNoS;
     cumNoS *= (1 - r);
     if (i < n) surv *= (1 - r);
@@ -131,16 +150,17 @@ document.getElementById('calc').onclick = () => {
   pAnyS = 1 - surv;
   for (const key in dist) { if (key.split(',')[2] === '1') pFeat += dist[key]; }
   const cost = n * cfg.costPerPull;
-  out.innerHTML = `<p class="result">${game}: ${(pFeat * 100).toFixed(1)}% chance of the featured S in ${n} pulls</p>
+  const rateNote = game === 'NTE' ? ' (0.99% community model, unverified)' : (isW ? ' (1.0% official base rate; soft pity not modelled — see note below)' : '');
+  const featNote = isW ? 'W-Engine channel: 75/25 — if you lose it, the following S W-Engine is guaranteed featured; tick the box above if that applies to you.' : (game === 'ZZZ' ? '50/50: if you lose it, the following S is guaranteed featured — tick the box above if that applies to you.' : 'NTE has no 50/50: any S is the featured character.');
+  out.innerHTML = `<p class="result">${game}: ${(pFeat * 100).toFixed(1)}% chance of the ${targetName} in ${n} pulls</p>
   <ul>
   <li>Chance of <strong>any</strong> S-rank in ${n} pulls: <strong>${(pAnyS * 100).toFixed(1)}%</strong></li>
   <li>Expected pulls until your next S (from pity ${p0}): <strong>${expPulls.toFixed(1)}</strong></li>
   <li>Cost of ${n} pulls: <strong>${cost.toLocaleString()} ${cfg.currency}</strong></li>
-  <li>Next pull S chance: <strong>${(rate(p0) * 100).toFixed(2)}%</strong>${game === 'NTE' ? ' (0.99% community model, unverified)' : ''}</li>
+  <li>Next pull S chance: <strong>${(rate(p0) * 100).toFixed(2)}%</strong>${rateNote}</li>
   </ul>
-  <p class="note">Exact calculation from the per-pull rates in src/gacha.js. ${game === 'ZZZ' ? '50/50: if you lose it, the following S is guaranteed featured — tick the box above if that applies to you.' : 'NTE has no 50/50: any S is the featured character.'}</p>`;
+  <p class="note">Exact calculation from the per-pull rates above. ${featNote}</p>`;
 };
-setGame('NTE');
 </script>
 <script src="src/nav.js" defer></script>
 </body>
