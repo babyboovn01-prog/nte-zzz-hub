@@ -161,6 +161,12 @@ export const ZZZ_AGENT_IMG = {
   "Severian Lowell": "https://enka.network/ui/zzz/IconRoleCircle1631.png",
   "Phoenix Reffaella": "https://enka.network/ui/zzz/IconRoleCircle1641.png",
 };
+// Full splash portraits, derived from the circle icons above (IconRoleCircle<id> →
+// IconRole<id>). Curl-verified 8 Nov 2026 for ids 1631, 1641, 36, 1611, 01, 64 (all
+// 200). Loaded ONLY on row hover (on demand), never preloaded — see src/tooltip.js.
+export const ZZZ_AGENT_BIG = Object.fromEntries(
+  Object.entries(ZZZ_AGENT_IMG).map(([name, url]) => [name, url.replace('IconRoleCircle', 'IconRole')])
+);
 // NTE: nte.wiki character icons (https://nte.wiki/images/characters/<slug>.webp).
 // 20/26 resolve (curl-tested 8 Nov 2026). null = 404 on nte.wiki (v1.3/v1.4/v1.5
 // characters: Zankou, Linko, Blackbird, Akane Rin, Elyms, Exe — nte.wiki is stale at v1.2).
