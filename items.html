@@ -89,6 +89,7 @@
 <footer>PityHub — NTE + ZZZ Hub. Data checked 8 Nov 2026. Not affiliated with HoYoverse, Hotta Studio, or Perfect World. Character/item artwork © HoYoverse / Hotta Studio &amp; Perfect World. More games coming soon.</footer>
 <script type="module">
 import { ZZZ_WENGINES, ZZZ_DISCS, ZZZ_BANGBOO, NTE_ARCS, ZZZ_WENGINE_IMG, ZZZ_DISC_IMG, ZZZ_BANGBOO_IMG, NTE_ARC_IMG } from './src/items.js';
+import { initTooltips, refreshTips } from './src/tooltip.js';
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
 const imgCell = (url, name) => url ? `<img class="thumb" src="${url}" alt="${esc(name)}" loading="lazy" width="48" height="48" onerror="this.style.display='none'">` : '<span class="thumb-ph">No image yet</span>';
 const boxes = { w: 'boxW', d: 'boxD', b: 'boxB', a: 'boxA' };
@@ -97,10 +98,11 @@ function render() {
   const q = document.getElementById('q').value.trim().toLowerCase();
   const rank = document.getElementById('rank').value;
   const match = r => (!q || r.join(' ').toLowerCase().includes(q)) && (!rank || r[1] === rank);
-  document.getElementById('wRows').innerHTML = ZZZ_WENGINES.filter(match).map(r => `<tr><td>${imgCell(ZZZ_WENGINE_IMG[r[0]], r[0])}</td><td>${esc(r[0])}</td><td>${r[1]}</td><td>${esc(r[2])}</td><td>${esc(r[3])} ${r[4]}</td></tr>`).join('') || '<tr><td colspan="5">No matches.</td></tr>';
-  document.getElementById('dRows').innerHTML = ZZZ_DISCS.filter(r => !q || r.join(' ').toLowerCase().includes(q)).map(r => `<tr><td>${imgCell(ZZZ_DISC_IMG[r[0]], r[0])}</td><td>${esc(r[0])}</td><td>${esc(r[1])}</td><td>${esc(r[2])}</td><td>See in-game</td></tr>`).join('') || '<tr><td colspan="5">No matches.</td></tr>';
-  document.getElementById('bRows').innerHTML = ZZZ_BANGBOO.filter(match).map(r => `<tr><td>${imgCell(ZZZ_BANGBOO_IMG[r[0]], r[0])}</td>${r.map(c => `<td>${esc(c)}</td>`).join('')}</tr>`).join('') || '<tr><td colspan="6">No matches.</td></tr>';
-  document.getElementById('aRows').innerHTML = NTE_ARCS.filter(r => !q || r.join(' ').toLowerCase().includes(q)).map(r => `<tr><td>${imgCell(NTE_ARC_IMG[r[1]], r[1])}</td>${r.map(c => `<td>${esc(c)}</td>`).join('')}</tr>`).join('') || '<tr><td colspan="5">No matches.</td></tr>';
+  document.getElementById('wRows').innerHTML = ZZZ_WENGINES.filter(match).map(r => `<tr><td>${imgCell(ZZZ_WENGINE_IMG[r[0]], r[0])}</td><td data-tip-name="${esc(r[0])}" data-tip-kind="w">${esc(r[0])}</td><td>${r[1]}</td><td>${esc(r[2])}</td><td>${esc(r[3])} ${r[4]}</td></tr>`).join('') || '<tr><td colspan="5">No matches.</td></tr>';
+  document.getElementById('dRows').innerHTML = ZZZ_DISCS.filter(r => !q || r.join(' ').toLowerCase().includes(q)).map(r => `<tr><td>${imgCell(ZZZ_DISC_IMG[r[0]], r[0])}</td><td data-tip-name="${esc(r[0])}" data-tip-kind="d">${esc(r[0])}</td><td>${esc(r[1])}</td><td>${esc(r[2])}</td><td>See in-game</td></tr>`).join('') || '<tr><td colspan="5">No matches.</td></tr>';
+  document.getElementById('bRows').innerHTML = ZZZ_BANGBOO.filter(match).map(r => `<tr><td>${imgCell(ZZZ_BANGBOO_IMG[r[0]], r[0])}</td><td data-tip-name="${esc(r[0])}" data-tip-kind="b">${esc(r[0])}</td>${r.slice(1).map(c => `<td>${esc(c)}</td>`).join('')}</tr>`).join('') || '<tr><td colspan="6">No matches.</td></tr>';
+  document.getElementById('aRows').innerHTML = NTE_ARCS.filter(r => !q || r.join(' ').toLowerCase().includes(q)).map(r => `<tr><td>${imgCell(NTE_ARC_IMG[r[1]], r[1])}</td><td data-tip-name="${esc(r[0])}" data-tip-kind="a">${esc(r[0])}</td>${r.slice(1).map(c => `<td>${esc(c)}</td>`).join('')}</tr>`).join('') || '<tr><td colspan="5">No matches.</td></tr>';
+  refreshTips();
 }
 function setTab(t) {
   active = t;
@@ -119,6 +121,7 @@ document.getElementById('q').oninput = render;
 document.getElementById('rank').onchange = render;
 const g = new URLSearchParams(location.search).get('game');
 if (g === 'nte') setTab('a'); else setTab('w');
+initTooltips();
 </script>
 </body>
 </html>

@@ -43,7 +43,7 @@
 </nav><span class="navnote">More games coming soon</span></div></header>
 <main>
 <h1>ZZZ Wish Simulator — v3.3 Phase 2</h1>
-<p>Simulate the Exclusive Channel (Signal Search). Current banner: <strong>“Answers in the Wind” — Severian Lowell</strong> (S / Wind / Attack), 11 Nov 12:00 – 1 Dec 14:59 server time. Rerun: Norma Hollowell (S / Fire / Stun). W-Engines: Incarcerating Grip (new), Chief Sidekick (rerun).</p>
+<p>Simulate the Exclusive Channel (Signal Search). Current banner: <strong>“Answers in the Wind” — <span class="tip-name" data-tip-name="Severian Lowell" data-tip-kind="char" data-tip-game="ZZZ">Severian Lowell</span></strong> (S / Wind / Attack), 11 Nov 12:00 – 1 Dec 14:59 server time. Rerun: <span class="tip-name" data-tip-name="Norma Hollowell" data-tip-kind="char" data-tip-game="ZZZ">Norma Hollowell</span> (S / Fire / Stun). W-Engines: <span class="tip-name" data-tip-name="Incarcerating Grip" data-tip-kind="w">Incarcerating Grip</span> (new), <span class="tip-name" data-tip-name="Chief Sidekick" data-tip-kind="w">Chief Sidekick</span> (rerun).</p>
 <div class="warn"><strong>Rates:</strong> S base 0.6% / 1.6% consolidated and hard pity 90 are from the in-game Signal Search Details screen (HoYoverse). <strong>Soft pity is community-measured, not published by HoYoverse:</strong> ramp from pull 74, +6% per pull (sources differ 74 vs 75). 50/50 applies — lose it once and the next S is guaranteed featured. A-rank or higher at least once per 10 searches. 160 Polychrome per search.</div>
 <div class="card">
 <label for="banner">Banner</label>
@@ -57,6 +57,8 @@
 <footer>PityHub — NTE + ZZZ Hub. Data checked 8 Nov 2026. Not affiliated with HoYoverse. Character/item artwork © HoYoverse / Hotta Studio &amp; Perfect World.</footer>
 <script type="module">
 import { pullOnce, ZZZ } from './src/gacha.js';
+import { initTooltips } from './src/tooltip.js';
+initTooltips();
 const log = document.getElementById('log'), stats = document.getElementById('stats'), banner = document.getElementById('banner');
 let pity = 0, total = 0, s = 0, won = 0, lost = 0, guaranteed = false;
 function render(res) {

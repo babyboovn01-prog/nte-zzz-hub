@@ -43,7 +43,7 @@
 </nav><span class="navnote">More games coming soon</span></div></header>
 <main>
 <h1>NTE Wish Simulator — v1.5</h1>
-<p>Simulate the Scarborough Fair character banner. Current banners: <strong>Phase 1 “Android Dreams” — Elyms</strong> (S / Cosmos / Solid), 11 Nov–2 Dec 2026, and <strong>Phase 2 “Offline Equations” — Exe</strong> (S / Chaos / Plasma), 2–23 Dec 2026. Reruns: Shinku (Phase 1), Chaos (Phase 2).</p>
+<p>Simulate the Scarborough Fair character banner. Current banners: <strong>Phase 1 “Android Dreams” — <span class="tip-name" data-tip-name="Elyms" data-tip-kind="char" data-tip-game="NTE">Elyms</span></strong> (S / Cosmos / Solid), 11 Nov–2 Dec 2026, and <strong>Phase 2 “Offline Equations” — <span class="tip-name" data-tip-name="Exe" data-tip-kind="char" data-tip-game="NTE">Exe</span></strong> (S / Chaos / Plasma), 2–23 Dec 2026. Reruns: <span class="tip-name" data-tip-name="Shinku" data-tip-kind="char" data-tip-game="NTE">Shinku</span> (Phase 1), <span class="tip-name" data-tip-name="Chaos" data-tip-kind="char" data-tip-game="NTE">Chaos</span> (Phase 2).</p>
 <div class="warn"><strong>Rates are community-modelled / UNVERIFIED.</strong> No official Hotta / Perfect World rate sheet was found. Model used: S base 0.99% (pulls 1–70), 19.59% flat on pulls 71–89, hard pity 90. Base rate is disputed (0.6% in a CBT-era table vs 0.99% in the current community model). No 50/50 on limited character banners — any S pulled is the featured character. Pity is shared across limited boards. A-rank or higher guaranteed every 10 pulls. 160 Annulith per pull.</div>
 <div class="card">
 <label for="banner">Banner</label>
@@ -57,6 +57,8 @@
 <footer>PityHub — NTE + ZZZ Hub. Rates community-modelled, unverified. Data checked 8 Nov 2026. Not affiliated with Hotta Studio / Perfect World. Character/item artwork © HoYoverse / Hotta Studio &amp; Perfect World.</footer>
 <script type="module">
 import { pullOnce, NTE } from './src/gacha.js';
+import { initTooltips } from './src/tooltip.js';
+initTooltips();
 const log = document.getElementById('log'), stats = document.getElementById('stats'), banner = document.getElementById('banner');
 let pity = 0, total = 0, s = 0;
 function render(res) {
