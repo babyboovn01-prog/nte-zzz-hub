@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Damage Calculator — NTE &amp; ZZZ Estimator</title>
+<meta name="description" content="Simple ATK / CRIT / DMG% damage estimator for Neverness to Everness and Zenless Zone Zero. An estimator, not game-accurate damage.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="brand" href="index.html">NTE + ZZZ Hub</a><nav><a href="nte-simulator.html">NTE Simulator</a><a href="zzz-simulator.html">ZZZ Simulator</a><a href="pity-tracker.html">Pity Tracker</a><a href="damage-calculator.html">Damage Calc</a><a href="banner-schedule.html">Banners</a><a href="tier-list.html">Tier Lists</a><a href="codes.html">Codes</a><a href="characters.html">Characters</a></nav></div></header>
+<main>
+<h1>Damage Calculator — Estimator</h1>
+<p>Compare builds quickly: enter a character's ATK, CRIT Rate, CRIT DMG and DMG Bonus. Works the same way for NTE and ZZZ builds, because it uses only the shared formula below.</p>
+<div class="warn"><strong>This is an estimator, not game-accurate damage.</strong> It does NOT model enemy DEF, elemental RES, skill multipliers per hit, anomaly / disorder, buffs, debuffs, or each game's real damage formula. Use it to compare two builds of the same character, not to predict exact in-game numbers.</div>
+<div class="card">
+<label for="atk">ATK</label><input id="atk" type="number" value="2000" min="0">
+<label for="critRate">CRIT Rate (%)</label><input id="critRate" type="number" value="60" min="0" max="100">
+<label for="critDmg">CRIT DMG (%)</label><input id="critDmg" type="number" value="120" min="0">
+<label for="dmgBonus">DMG Bonus (%) — elemental / skill DMG bonus</label><input id="dmgBonus" type="number" value="30" min="0">
+<label for="mult">Skill multiplier (%) — e.g. 250 for a 250% skill hit</label><input id="mult" type="number" value="100" min="0">
+<button id="calc">Calculate</button>
+<div id="out" style="margin-top:1rem"></div>
+<p class="note">Formula: base = ATK × (1 + DMG Bonus) × Skill Multiplier. Non-crit hit = base. Crit hit = base × (1 + CRIT DMG). Expected hit = base × (1 + CRIT Rate × CRIT DMG).</p>
+</div>
+<div class="card"><h2>Example — compare two builds</h2>
+<p>Build A: ATK 2,000, CRIT 60% / 120%, DMG Bonus 30%, skill 100% → expected hit ≈ <strong>4,472</strong>.<br>
+Build B: ATK 2,200, CRIT 50% / 150%, DMG Bonus 30%, skill 100% → expected hit ≈ <strong>5,005</strong> — Build B wins on expected damage despite lower CRIT Rate. Try your own numbers above.</p>
+<p class="note">Phoenix (ZZZ) community build note: 4-pc Freedom Blues + 2-pc Phaethon's Melody, with a community target of 255 initial Anomaly Mastery for 100% Attribute Anomaly CRIT Rate on Seared enemies — that target is community-sourced, not published by HoYoverse. Severian best Drive Disc set: <span class="tbd">TBD</span> — no official set published as of 6 Nov 2026.</p></div>
+</main>
+<footer>PityHub — NTE + ZZZ Hub.</footer>
+<script>
+document.getElementById('calc').onclick = () => {
+  const atk = parseFloat(document.getElementById('atk').value) || 0;
+  const cr = (parseFloat(document.getElementById('critRate').value) || 0) / 100;
+  const cd = (parseFloat(document.getElementById('critDmg').value) || 0) / 100;
+  const db = (parseFloat(document.getElementById('dmgBonus').value) || 0) / 100;
+  const mult = (parseFloat(document.getElementById('mult').value) || 0) / 100;
+  const base = atk * (1 + db) * mult;
+  const nonCrit = base, crit = base * (1 + cd), expected = base * (1 + cr * cd);
+  document.getElementById('out').innerHTML = `<p class="result">Expected hit: ${expected.toLocaleString(undefined, { maximumFractionDigits: 0 })}</p>
+  <ul><li>Non-crit hit: <strong>${nonCrit.toLocaleString(undefined, { maximumFractionDigits: 0 })}</strong></li>
+  <li>Crit hit: <strong>${crit.toLocaleString(undefined, { maximumFractionDigits: 0 })}</strong></li>
+  <li>CRIT Rate ${Math.round(cr * 100)}% → crits about ${Math.round(cr * 100)} in 100 hits</li></ul>
+  <p class="note">Estimator only — enemy DEF/RES, buffs and per-skill mechanics are not modelled.</p>`;
+};
+document.getElementById('calc').onclick();
+</script>
+</body>
+</html>

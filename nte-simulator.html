@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NTE Wish Simulator — Neverness to Everness v1.5 (Elyms / Exe)</title>
+<meta name="description" content="Simulate NTE Scarborough Fair pulls for v1.5: Elyms Phase 1 and Exe Phase 2. Community-modelled rates: S 0.99%, soft pity 70, hard pity 90, no 50/50.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="brand" href="index.html">NTE + ZZZ Hub</a><nav><a href="nte-simulator.html">NTE Simulator</a><a href="zzz-simulator.html">ZZZ Simulator</a><a href="pity-tracker.html">Pity Tracker</a><a href="damage-calculator.html">Damage Calc</a><a href="banner-schedule.html">Banners</a><a href="tier-list.html">Tier Lists</a><a href="codes.html">Codes</a><a href="characters.html">Characters</a></nav></div></header>
+<main>
+<h1>NTE Wish Simulator — v1.5</h1>
+<p>Simulate the Scarborough Fair character banner. Current banners: <strong>Phase 1 “Android Dreams” — Elyms</strong> (S / Cosmos / Solid), 11 Nov–2 Dec 2026, and <strong>Phase 2 “Offline Equations” — Exe</strong> (S / Chaos / Plasma), 2–23 Dec 2026. Reruns: Shinku (Phase 1), Chaos (Phase 2).</p>
+<div class="warn"><strong>Rates are community-modelled / UNVERIFIED.</strong> No official Hotta / Perfect World rate sheet was found. Model used: S base 0.99% (pulls 1–70), 19.59% flat on pulls 71–89, hard pity 90. Base rate is disputed (0.6% in a CBT-era table vs 0.99% in the current community model). No 50/50 on limited character banners — any S pulled is the featured character. Pity is shared across limited boards. A-rank or higher guaranteed every 10 pulls. 160 Annulith per pull.</div>
+<div class="card">
+<label for="banner">Banner</label>
+<select id="banner"><option value="Elyms">Phase 1 — Elyms (11 Nov–2 Dec)</option><option value="Exe">Phase 2 — Exe (2–23 Dec)</option></select>
+<button id="p1">Pull ×1</button><button id="p10">Pull ×10</button><button id="reset" class="ghost">Reset session</button>
+<p class="result" id="stats">Pulls: 0 &nbsp;•&nbsp; S pulled: 0 &nbsp;•&nbsp; Pity: 0 &nbsp;•&nbsp; Spent: 0 Annulith</p>
+<pre id="log">Press Pull to start. Each line is one 10-pull or single pull; S = S-rank, A = non-S (A-rank or lower in this simplified model).</pre>
+<p class="note">Worst case for a featured S: 90 pulls = 14,400 Annulith. Character + signature Arc worst case: 170 pulls = 27,200 Annulith (Arc hard pity 80 pulls). See the <a href="pity-tracker.html">Pity Tracker</a> for exact odds at your current pity.</p>
+</div>
+</main>
+<footer>PityHub — NTE + ZZZ Hub. Rates community-modelled, unverified. Not affiliated with Hotta Studio / Perfect World.</footer>
+<script type="module">
+import { pullOnce, NTE } from './src/gacha.js';
+const log = document.getElementById('log'), stats = document.getElementById('stats'), banner = document.getElementById('banner');
+let pity = 0, total = 0, s = 0;
+function render(res) {
+  stats.textContent = `Pulls: ${total}  •  S pulled: ${s}  •  Pity: ${pity}  •  Spent: ${total * NTE.costPerPull} Annulith`;
+  if (res) log.textContent = `${banner.value}: ${res.join(' ')}\n` + (log.textContent.startsWith('Press') ? '' : log.textContent);
+}
+function doPulls(n) {
+  const res = [];
+  for (let i = 0; i < n; i++) {
+    const r = pullOnce('NTE', pity); res.push(r); total++;
+    if (r === 'S') { pity = 0; s++; } else pity++;
+  }
+  render(res);
+}
+document.getElementById('p1').onclick = () => doPulls(1);
+document.getElementById('p10').onclick = () => doPulls(10);
+document.getElementById('reset').onclick = () => { pity = 0; total = 0; s = 0; log.textContent = 'Session reset. Press Pull to start.'; render(); };
+</script>
+</body>
+</html>

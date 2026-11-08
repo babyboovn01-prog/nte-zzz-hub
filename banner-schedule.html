@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Banner Schedule — NTE v1.5 &amp; ZZZ v3.3 (Nov–Dec 2026)</title>
+<meta name="description" content="NTE v1.5 banner schedule (Elyms 11 Nov–2 Dec, Exe 2–23 Dec) and ZZZ v3.3 Phase 2 (Severian 11 Nov–1 Dec). Countdown to 11 Nov 2026.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="brand" href="index.html">NTE + ZZZ Hub</a><nav><a href="nte-simulator.html">NTE Simulator</a><a href="zzz-simulator.html">ZZZ Simulator</a><a href="pity-tracker.html">Pity Tracker</a><a href="damage-calculator.html">Damage Calc</a><a href="banner-schedule.html">Banners</a><a href="tier-list.html">Tier Lists</a><a href="codes.html">Codes</a><a href="characters.html">Characters</a></nav></div></header>
+<main>
+<h1>Banner Schedule — Nov–Dec 2026</h1>
+<div class="card"><h2>⏳ Countdown to 11 Nov 2026 — NTE v1.5 &amp; ZZZ Severian launch</h2>
+<p class="result" id="countdown">Loading…</p>
+<p class="note">NTE v1.5 launches 11 Nov 2026 (after maintenance; maintenance window not published as of 8 Nov). ZZZ Phase 2 opens 11 Nov 12:00 server time.</p></div>
+
+<h2>Neverness to Everness — v1.5 “Once Upon a Glitched Call” (11 Nov–23 Dec 2026, 42 days)</h2>
+<div class="table-wrap"><table>
+<tr><th>Phase</th><th>Window</th><th>New S</th><th>Rerun S</th><th>Signature Arcs</th><th>Featured A-ranks</th></tr>
+<tr><td>Phase 1</td><td>11 Nov–2 Dec 2026</td><td><strong>Elyms</strong> — S / Cosmos / Solid, “Android Dreams”</td><td><strong>Shinku</strong> — S / Cosmos / Condensate, “Before the Dawn”</td><td>Echoes on Hold (Elyms) · Blushing Mirage (Shinku)</td><td><span class="tbd">TBD — not announced</span></td></tr>
+<tr><td>Phase 2</td><td>2–23 Dec 2026</td><td><strong>Exe</strong> — S / Chaos / Plasma, “Offline Equations”</td><td><strong>Chaos</strong> — S / Lakshana / Condensate, “Forsaken Path”</td><td>Dotted Horizon (Exe) · What's Desired (Chaos)</td><td><span class="tbd">TBD — not announced</span></td></tr>
+</table></div>
+<p class="note">Featured A-ranks for both v1.5 phases were NOT FOUND in any livestream summary as of 8 Nov 2026. Do not assume the A-ranks from the original runs of these banners carry over. New in v1.5: Main Episode “Meet Me in the Data Stream”, Anomalous Realm “Invalid Number”, weekly boss Amber Broodmother (drops Hollowflower Seeds for Elyms + Exe ascension), City Logistics, Full Tank Ahead (tank PvP), Tycoon's Deck (from 2 Dec), login event Circle Gifts (7 days = 10 Solid Dice).</p>
+
+<h2>Zenless Zone Zero — v3.3 “Journey to the Sky” (21 Oct–2 Dec 2026, 42 days)</h2>
+<div class="table-wrap"><table>
+<tr><th>Phase</th><th>Window (server time)</th><th>New S</th><th>Rerun S</th><th>W-Engines</th><th>Featured A-ranks</th></tr>
+<tr><td>Phase I</td><td>21 Oct–11 Nov 11:59</td><td><strong>Phoenix</strong> — S / Fire / Anomaly, “Into the Flames of Life”</td><td><strong>Velina Airgid</strong> — S / Wind / Anomaly, “Graceful Gale”</td><td>Plume of Rebirth (new) · Joyau Dore (rerun)</td><td><span class="tbd">TBD — not announced</span></td></tr>
+<tr><td>Phase II</td><td>11 Nov 12:00–1 Dec 14:59</td><td><strong>Severian Lowell</strong> — S / Wind / Attack, “Answers in the Wind”</td><td><strong>Norma Hollowell</strong> — S / Fire / Stun, “Outlier of Prodigies”</td><td>Incarcerating Grip (new) · Chief Sidekick (rerun)</td><td><span class="tbd">TBD — not announced</span></td></tr>
+</table></div>
+<p class="note">Featured A-rank Agents for Phase I and Phase II were NOT FOUND in the official notices searched as of 8 Nov 2026. The Phase II Limited-Time Channels notice was expected ~9 Nov — check the in-game Signal Search Details screen. No new Drive Disc sets and no new Bangboo in v3.3.</p>
+
+<h2>Coming next — ZZZ v3.4 (expected 2 Dec 2026)</h2>
+<p><strong>Expected start 2 Dec 2026 — not officially confirmed by HoYoverse as of 8 Nov 2026.</strong> Sunbringer is confirmed playable in v3.4 (first Enchainer Agent, Void Hunter; three-in-one Eldreda + Lindverne + Dracaene). Kafka and Robin (Honkai: Star Rail collab) are confirmed playable in v3.4. Kit, banner phase, reruns and exact dates are not announced; phase-split dates circulating online are projections only. The “Robin free” claim is a rumour — unconfirmed.</p>
+<p class="note">Sources: Gematsu / Inven Global (28–29 Oct 2026), Game8, HoYoverse v3.3 Update Announcement, HoYoLAB notices. All dates checked 8 Nov 2026.</p>
+</main>
+<footer>PityHub — NTE + ZZZ Hub.</footer>
+<script>
+const target = new Date('2026-11-11T00:00:00+08:00');
+function tick() {
+  const d = target - new Date();
+  const el = document.getElementById('countdown');
+  if (d <= 0) { el.textContent = 'Launched! NTE v1.5 and ZZZ Severian are live (from 11 Nov 2026).'; return; }
+  const days = Math.floor(d / 86400000), h = Math.floor(d % 86400000 / 3600000), m = Math.floor(d % 3600000 / 60000), s = Math.floor(d % 60000 / 1000);
+  el.textContent = `${days}d ${h}h ${m}m ${s}s to go`;
+}
+tick(); setInterval(tick, 1000);
+</script>
+</body>
+</html>

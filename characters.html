@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Character Database — NTE (26) &amp; ZZZ (62)</title>
+<meta name="description" content="Full playable character lists for Neverness to Everness (26) and Zenless Zone Zero (61 live + Severian = 62 from 11 Nov 2026).">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="brand" href="index.html">NTE + ZZZ Hub</a><nav><a href="nte-simulator.html">NTE Simulator</a><a href="zzz-simulator.html">ZZZ Simulator</a><a href="pity-tracker.html">Pity Tracker</a><a href="damage-calculator.html">Damage Calc</a><a href="banner-schedule.html">Banners</a><a href="tier-list.html">Tier Lists</a><a href="codes.html">Codes</a><a href="characters.html">Characters</a></nav></div></header>
+<main>
+<h1>Character Database</h1>
+<p>Data checked 8 Nov 2026. Sources: Prydwen, ntegame.net, neverness.gg, TimeSaver. No official game art is used.</p>
+<div class="tabs"><button id="tabNTE" class="active">NTE — 26 characters</button><button id="tabZZZ">ZZZ — 62 Agents</button></div>
+
+<div id="nteBox">
+<h2>Neverness to Everness — 26 playable (20 S + 6 A)</h2>
+<p class="note">24 live on 8 Nov 2026 + Elyms and Exe (v1.5). Esper Zero counts once (one kit, male/female cards). * Arc-type naming: Synthesis / Condensate / Bose are used by different sources for the same 5th Arc type.</p>
+<div class="table-wrap"><table><thead><tr><th>Character</th><th>Rank</th><th>Element</th><th>Arc</th><th>Role</th><th>Status</th></tr></thead><tbody id="nteRows"></tbody></table></div>
+</div>
+
+<div id="zzzBox" style="display:none">
+<h2>Zenless Zone Zero — 62 Agents (61 live + Severian from 11 Nov)</h2>
+<p class="note">47 S-Rank (6 permanent, 41 limited), 13 A-Rank, 1 I-Rank (Pyrois). Counts as of 30 Oct 2026. Soldier 0 - Anby and Starlight - Billy Kid count separately from Anby / Billy Kid.</p>
+<div class="table-wrap"><table><thead><tr><th>Agent</th><th>Rank</th><th>Attribute</th><th>Specialty</th><th>Faction</th><th>Ver.</th><th>Released</th></tr></thead><tbody id="zzzRows"></tbody></table></div>
+</div>
+</main>
+<footer>PityHub — NTE + ZZZ Hub.</footer>
+<script type="module">
+import { NTE_ROSTER, ZZZ_ROSTER } from './src/characters.js';
+const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
+document.getElementById('nteRows').innerHTML = NTE_ROSTER.map(r => `<tr>${r.map(c => `<td>${esc(c)}</td>`).join('')}</tr>`).join('');
+document.getElementById('zzzRows').innerHTML = ZZZ_ROSTER.map(r => `<tr>${r.map(c => `<td>${esc(c)}</td>`).join('')}</tr>`).join('');
+const tabNTE = document.getElementById('tabNTE'), tabZZZ = document.getElementById('tabZZZ');
+tabNTE.onclick = () => { tabNTE.classList.add('active'); tabZZZ.classList.remove('active'); document.getElementById('nteBox').style.display = ''; document.getElementById('zzzBox').style.display = 'none'; };
+tabZZZ.onclick = () => { tabZZZ.classList.add('active'); tabNTE.classList.remove('active'); document.getElementById('zzzBox').style.display = ''; document.getElementById('nteBox').style.display = 'none'; };
+</script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NTE + ZZZ Hub — Wish Simulators, Pity Tracker &amp; Build Tools</title>
+<meta name="description" content="Free tools for Neverness to Everness (NTE) and Zenless Zone Zero (ZZZ): wish simulators, pity tracker, damage calculator, banner schedule, tier lists, codes and character database.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="brand" href="index.html">NTE + ZZZ Hub</a><nav><a href="nte-simulator.html">NTE Simulator</a><a href="zzz-simulator.html">ZZZ Simulator</a><a href="pity-tracker.html">Pity Tracker</a><a href="damage-calculator.html">Damage Calc</a><a href="banner-schedule.html">Banners</a><a href="tier-list.html">Tier Lists</a><a href="codes.html">Codes</a><a href="characters.html">Characters</a></nav></div></header>
+<main>
+<h1>Neverness to Everness &amp; Zenless Zone Zero — Tools Hub</h1>
+<p>Free, no-login tools for <strong>Neverness to Everness (NTE)</strong> and <strong>Zenless Zone Zero (ZZZ)</strong>. Simulators, pity math, banner dates, tier snapshots, codes and rosters — updated for NTE v1.5 and ZZZ v3.3, both arriving <strong>11 Nov 2026</strong>.</p>
+<div class="warn"><strong>About NTE rates:</strong> NTE gacha rates are <strong>community-modelled / unverified</strong> — no official Hotta / Perfect World rate sheet was found. Base S rate is disputed (0.6% CBT-era table vs 0.99% current community model); we use the 0.99% model and label it clearly. ZZZ Agent rates (0.6% base, hard pity 90, 50/50) are from the in-game Signal Search Details screen; ZZZ soft pity is community-measured.</div>
+
+<h2>Tools</h2>
+<div class="grid">
+<div class="tool"><h3>🎰 <a href="nte-simulator.html">NTE Wish Simulator</a></h3><p>Simulate Scarborough Fair pulls. Elyms (Phase 1) &amp; Exe (Phase 2) banners. No 50/50, hard pity 90.</p></div>
+<div class="tool"><h3>🎰 <a href="zzz-simulator.html">ZZZ Wish Simulator</a></h3><p>Simulate Signal Search. Severian banner from 11 Nov. 50/50, hard pity 90.</p></div>
+<div class="tool"><h3>📊 <a href="pity-tracker.html">Pity Tracker &amp; Calculator</a></h3><p>Enter your current pity, see your exact odds for the next pulls — NTE and ZZZ, with cost in Annulith / Polychrome.</p></div>
+<div class="tool"><h3>⚔️ <a href="damage-calculator.html">Damage Calculator</a></h3><p>Simple ATK / CRIT / DMG% estimator for both games. Labelled as an estimator, not game-accurate damage.</p></div>
+<div class="tool"><h3>📅 <a href="banner-schedule.html">Banner Schedule</a></h3><p>NTE v1.5 (11 Nov–23 Dec) and ZZZ v3.3 Phase 2 (11 Nov–1 Dec), with a live countdown to 11 Nov.</p></div>
+<div class="tool"><h3>🏆 <a href="tier-list.html">Tier Lists</a></h3><p>Community snapshot, 8 Nov 2026. ZZZ v3.3 list; NTE re-ranked after v1.5 launches.</p></div>
+<div class="tool"><h3>🎁 <a href="codes.html">Redeem Codes</a></h3><p>ZZZ active codes (110 Polychrome total) and NTE codes — most NTE codes are already expired. Last checked 8 Nov 2026.</p></div>
+<div class="tool"><h3>👥 <a href="characters.html">Character Database</a></h3><p>NTE: 26 characters. ZZZ: 61 live + Severian = 62 from 11 Nov 2026.</p></div>
+</div>
+
+<h2>Quick simulators — try them here</h2>
+<div class="card">
+<h3>Neverness to Everness — v1.5 starts 11 Nov 2026</h3>
+<p class="note">Elyms (Phase 1, 11 Nov–2 Dec) • Exe (Phase 2, 2–23 Dec) • S 0.99% community model, soft pity 70, hard pity 90, no 50/50, 160 Annulith/pull.</p>
+<button id="nte1">Pull ×1 (NTE)</button><button id="nte10">Pull ×10 (NTE)</button>
+<h3>Zenless Zone Zero — v3.3 Phase 2 from 11 Nov 2026</h3>
+<p class="note">Severian (11 Nov–1 Dec) • S 0.6% official, soft pity ~74 (community), hard pity 90, 50/50, 160 Polychrome/pull.</p>
+<button id="zzz1">Pull ×1 (ZZZ)</button><button id="zzz10">Pull ×10 (ZZZ)</button>
+<pre id="out">Press a button to pull. Pity resets on S.</pre>
+<p><a href="nte-simulator.html">Full NTE simulator →</a> &nbsp; <a href="zzz-simulator.html">Full ZZZ simulator →</a></p>
+</div>
+<p class="note">Data checked 8 Nov 2026. Sources: Prydwen, Game8, ntegame.net, TimeSaver, HoYoLAB / HoYoverse notices. No official game art is used on this site. NTE is © Hotta Studio / Perfect World; ZZZ is © HoYoverse.</p>
+</main>
+<footer>PityHub — NTE + ZZZ Hub. Not affiliated with Hotta Studio, Perfect World, or HoYoverse.</footer>
+<script type="module">
+import { pullOnce, NTE, ZZZ } from './src/gacha.js';
+const out = document.getElementById('out');
+let pity = { NTE: 0, ZZZ: 0 }, total = { NTE: 0, ZZZ: 0 }, sCount = { NTE: 0, ZZZ: 0 };
+function doPulls(game, n) {
+  const cfg = game === 'NTE' ? NTE : ZZZ;
+  const results = [];
+  for (let i = 0; i < n; i++) {
+    const r = pullOnce(game, pity[game]);
+    results.push(r); total[game]++;
+    if (r === 'S') { pity[game] = 0; sCount[game]++; } else pity[game]++;
+  }
+  out.textContent = `${game}: ${results.join(' ')}  |  pulls: ${total[game]}, S: ${sCount[game]}, pity now: ${pity[game]}, cost: ${total[game] * cfg.costPerPull} ${cfg.currency}`;
+}
+document.getElementById('nte1').onclick = () => doPulls('NTE', 1);
+document.getElementById('nte10').onclick = () => doPulls('NTE', 10);
+document.getElementById('zzz1').onclick = () => doPulls('ZZZ', 1);
+document.getElementById('zzz10').onclick = () => doPulls('ZZZ', 10);
+</script>
+</body>
+</html>

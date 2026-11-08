@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ZZZ Wish Simulator — Zenless Zone Zero v3.3 (Severian)</title>
+<meta name="description" content="Simulate ZZZ Signal Search for v3.3 Phase 2: Severian. Official rates: S 0.6%, hard pity 90, 50/50. Soft pity is community-measured.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="brand" href="index.html">NTE + ZZZ Hub</a><nav><a href="nte-simulator.html">NTE Simulator</a><a href="zzz-simulator.html">ZZZ Simulator</a><a href="pity-tracker.html">Pity Tracker</a><a href="damage-calculator.html">Damage Calc</a><a href="banner-schedule.html">Banners</a><a href="tier-list.html">Tier Lists</a><a href="codes.html">Codes</a><a href="characters.html">Characters</a></nav></div></header>
+<main>
+<h1>ZZZ Wish Simulator — v3.3 Phase 2</h1>
+<p>Simulate the Exclusive Channel (Signal Search). Current banner: <strong>“Answers in the Wind” — Severian Lowell</strong> (S / Wind / Attack), 11 Nov 12:00 – 1 Dec 14:59 server time. Rerun: Norma Hollowell (S / Fire / Stun). W-Engines: Incarcerating Grip (new), Chief Sidekick (rerun).</p>
+<div class="warn"><strong>Rates:</strong> S base 0.6% / 1.6% consolidated and hard pity 90 are from the in-game Signal Search Details screen (HoYoverse). <strong>Soft pity is community-measured, not published by HoYoverse:</strong> ramp from pull 74, +6% per pull (sources differ 74 vs 75). 50/50 applies — lose it once and the next S is guaranteed featured. A-rank or higher at least once per 10 searches. 160 Polychrome per search.</div>
+<div class="card">
+<label for="banner">Banner</label>
+<select id="banner"><option value="Severian">Phase 2 — Severian (11 Nov–1 Dec)</option><option value="Phoenix">Phase 1 — Phoenix (ends 11 Nov 11:59)</option></select>
+<button id="p1">Pull ×1</button><button id="p10">Pull ×10</button><button id="reset" class="ghost">Reset session</button>
+<p class="result" id="stats">Pulls: 0 &nbsp;•&nbsp; S pulled: 0 &nbsp;•&nbsp; Featured won: 0 &nbsp;•&nbsp; 50/50 lost: 0 &nbsp;•&nbsp; Pity: 0 &nbsp;•&nbsp; Spent: 0 Polychrome</p>
+<pre id="log">Press Pull to start. S★ = featured S (won 50/50 or guaranteed), S = off-banner S (lost 50/50), A = non-S.</pre>
+<p class="note">Worst case for a featured Agent: 180 pulls = 28,800 Polychrome. Guaranteed S (any): 90 pulls = 14,400 Polychrome. See the <a href="pity-tracker.html">Pity Tracker</a> for exact odds at your current pity.</p>
+</div>
+</main>
+<footer>PityHub — NTE + ZZZ Hub. Not affiliated with HoYoverse.</footer>
+<script type="module">
+import { pullOnce, ZZZ } from './src/gacha.js';
+const log = document.getElementById('log'), stats = document.getElementById('stats'), banner = document.getElementById('banner');
+let pity = 0, total = 0, s = 0, won = 0, lost = 0, guaranteed = false;
+function render(res) {
+  stats.textContent = `Pulls: ${total}  •  S pulled: ${s}  •  Featured won: ${won}  •  50/50 lost: ${lost}  •  Pity: ${pity}  •  Spent: ${total * ZZZ.costPerPull} Polychrome`;
+  if (res) log.textContent = `${banner.value}: ${res.join(' ')}\n` + (log.textContent.startsWith('Press') ? '' : log.textContent);
+}
+function doPulls(n) {
+  const res = [];
+  for (let i = 0; i < n; i++) {
+    const r = pullOnce('ZZZ', pity); total++;
+    if (r === 'S') {
+      pity = 0; s++;
+      if (guaranteed || Math.random() < 0.5) { res.push('S★'); won++; guaranteed = false; }
+      else { res.push('S'); lost++; guaranteed = true; }
+    } else { pity++; res.push('A'); }
+  }
+  render(res);
+}
+document.getElementById('p1').onclick = () => doPulls(1);
+document.getElementById('p10').onclick = () => doPulls(10);
+document.getElementById('reset').onclick = () => { pity = 0; total = 0; s = 0; won = 0; lost = 0; guaranteed = false; log.textContent = 'Session reset. Press Pull to start.'; render(); };
+</script>
+</body>
+</html>
