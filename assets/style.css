@@ -85,6 +85,7 @@ th{background:#26264a;color:#fff;white-space:nowrap}
 tbody tr:nth-child(even){background:rgba(255,255,255,.025)}
 tbody tr:hover{background:rgba(139,124,255,.08)}
 .table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:10px}
+.table-wrap td{white-space:nowrap} /* dates, names and "Simulate →" never wrap mid-value; wide tables scroll inside the wrapper */
 img.thumb{width:48px;height:48px;object-fit:contain;border-radius:8px;vertical-align:middle;background:#26264a}
 .thumb-ph{display:inline-block;width:48px;min-height:48px;font-size:.72rem;line-height:1.2;color:var(--muted);text-align:center;vertical-align:middle}
 pre{background:#0a0a16;color:#e8e6ff;padding:1rem;overflow:auto;border-radius:10px;white-space:pre-wrap;word-break:break-word;border:1px solid var(--line);font-size:1rem;line-height:1.5}
