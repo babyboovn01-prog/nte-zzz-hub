@@ -1,4 +1,15 @@
-// Roster data — sources: nte-data-v15.md §7, zzz-data-v33.md §3 (checked 8 Nov 2026).
+// Short names used by community tier lists, mapped to full roster names.
+// "Rina" is Alexandrina Sebastiane — EnkaNetwork/API-docs store/zzz/
+// avatars.json id 1211: Name "Avatar_Female_Size03_Rina", Rarity 4 (S-rank),
+// ProfessionType Support, ElementTypes ["Elec"], CircleIcon
+// "/ui/zzz/IconRoleCircle22.png", Image "/ui/zzz/IconRole22.png".
+// Both Enka URLs curl-verified 200 on 8 Nov 2026. She is ALREADY in
+// ZZZ_ROSTER below (first entry) and in ZZZ_AGENT_IMG (Circle22); the
+// tier list previously looked her up as "Rina" and found nothing, so her
+// row rendered "—". Look her up by the full name (or via this alias).
+export const ZZZ_NAME_ALIASES = {
+  "Rina": "Alexandrina Sebastiane",
+};
 // NTE: 20 S + 6 A = 26. ZZZ: 61 live (30 Oct 2026) + Severian (11 Nov) = 62.
 export const NTE_ROSTER = [
 ["Esper Zero","S","Cosmos","Solid","Damage / Sub-DPS","Live, free starter"],
