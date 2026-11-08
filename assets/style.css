@@ -33,6 +33,9 @@ header.site nav>a:hover,header.site nav summary:hover{background:#23234a;text-de
 .navdrop .drop a{display:block;padding:.55rem .6rem;min-height:44px;border-radius:6px}
 .navdrop .drop a:hover{background:#33335e}
 .navnote{font-size:.8rem;opacity:.7}
+.nav-toggle{display:none}
+footer .footnav{margin-top:.5rem}
+footer .footnav a{margin:0 .1rem}
 
 main{max-width:1024px;margin:0 auto;padding:1rem 1rem 3rem}
 h1{font-size:1.7rem;line-height:1.25;margin:.6rem 0 .8rem}
@@ -147,7 +150,16 @@ footer a{color:var(--muted);text-decoration:underline}
   main{padding:.7rem .7rem 2rem}
   header.site{padding:.5rem .7rem}
   header.site .wrap{gap:.2rem .6rem}
-  header.site nav{width:100%}
+  /* Hamburger menu: header stays one row (brand + toggle); nav is hidden
+     until the toggle opens it, so the header no longer wraps to 2–3 rows. */
+  .nav-toggle{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;margin:0 0 0 auto;padding:.4rem .7rem;font-size:1.25rem;line-height:1;background:transparent;border:1px solid var(--line2);color:#fff}
+  header.site nav{display:none;width:100%;flex-direction:column;align-items:stretch}
+  header.site.nav-open nav{display:flex}
+  header.site nav>a,header.site nav summary{min-height:44px;width:100%}
+  .navdrop{display:block;width:100%}
+  .navnote{display:none}
+  header.site .wrap{flex-wrap:nowrap}
+  header.site.nav-open .wrap{flex-wrap:wrap}
   .navdrop .drop{position:static;min-width:0;box-shadow:none}
   .grid{grid-template-columns:1fr}
   .card{padding:.9rem}
