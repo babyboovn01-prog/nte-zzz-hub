@@ -239,6 +239,7 @@ footer a{color:var(--muted);text-decoration:underline}
 .pull-card.rar-s .pc-tag{color:#ffd76a}
 .pull-card.rar-a .pc-tag{color:#b3a6ff}
 .pull-card .pc-name{font-size:.78rem;font-weight:700;line-height:1.25;margin-top:.15rem;min-height:2em}
+.pull-card .pc-detail{display:block;font-size:.66rem;color:var(--muted);line-height:1.25;margin-top:.1rem}
 @keyframes pullIn{from{opacity:0;transform:translateY(10px) scale(.9)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){.pull-card{animation:none}}
 .pulls-empty{grid-column:1/-1;text-align:center;color:var(--muted);padding:1.2rem;border:1px dashed var(--line2);border-radius:12px}
