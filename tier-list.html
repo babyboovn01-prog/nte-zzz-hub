@@ -43,7 +43,7 @@
 </nav><span class="navnote">More games coming soon</span></div></header>
 <main>
 <h1>Tier Lists — Community Snapshot</h1>
-<p><strong>Snapshot date: 8 Nov 2026.</strong> HoYoverse and Hotta / Perfect World publish no official tier lists. Everything below is a community ranking — treat it as a guide, not a fact, and re-check after the 11 Nov launches. Hover over (or tap) any character name to see their stats.</p>
+<p><strong>Snapshot date: 8 Nov 2026.</strong> HoYoverse and Hotta / Perfect World publish no official tier lists. Everything below is a community ranking — treat it as a guide, not a fact, and re-check after the 11 Nov launches. Hover over (or tap) any row to see a large image + stats.</p>
 
 <h2 id="zzz">Zenless Zone Zero — v3.3 (TimeSaver, updated 1 Nov 2026)</h2>
 <p>Source: TimeSaver Nov 2026 tier list, using Prydwen's public usage dataset (snapshot 25 Oct 2026). Phoenix is S+ (30.2% Deadly Assault usage in her first cycle, ~94% of runs with Velina). Full S/A/B rows are not reproduced here; see the linked TimeSaver list for the complete ranking.</p>
@@ -57,7 +57,7 @@
 </main>
 <footer>PityHub — NTE + ZZZ Hub. Community snapshot, 8 Nov 2026. Not affiliated with HoYoverse or Hotta Studio / Perfect World. Character/item artwork © HoYoverse / Hotta Studio &amp; Perfect World.</footer>
 <script type="module">
-import { NTE_ROSTER, ZZZ_ROSTER, NTE_CHAR_IMG, ZZZ_AGENT_IMG } from './src/characters.js';
+import { NTE_ROSTER, ZZZ_ROSTER, NTE_CHAR_IMG, ZZZ_AGENT_IMG, ZZZ_AGENT_BIG } from './src/characters.js';
 import { initTooltips, refreshTips } from './src/tooltip.js';
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
 const imgCell = (url, name, ph) => url ? `<img class="thumb" src="${url}" alt="${esc(name)}" loading="lazy" width="48" height="48" onerror="this.style.display='none'">` : `<span class="thumb-ph">${ph}</span>`;
@@ -83,18 +83,18 @@ const NTE_TIERS = [
   ['Top (v1.4 consensus)', 'Blackbird'], ['Top (v1.4 consensus)', 'Akane Rin'],
   ['Unranked', 'Elyms'], ['Unranked', 'Exe'],
 ];
-const badge = t => t === 'S+' ? '<span class="badge s">S+</span>' : t === 'S' ? '<span class="badge">S</span>' : t === 'Unranked' ? '<span class="tbd">UNRANKED</span>' : esc(t);
+const badge = t => t === 'S+' ? '<span class="tier tier-splus">S+</span>' : t === 'S' ? '<span class="tier tier-s">S</span>' : t === 'A' ? '<span class="tier tier-a">A</span>' : t === 'B' ? '<span class="tier tier-b">B</span>' : t === 'Unranked' ? '<span class="tier tier-unranked">UNRANKED</span>' : t.startsWith('Top') ? '<span class="tier tier-top">Top (v1.4 consensus)</span>' : esc(t);
 document.getElementById('zzzTierRows').innerHTML = ZZZ_TIERS.map(([tier, name]) => {
   const r = zzzByName[name];
-  if (!r) return `<tr><td><span class="thumb-ph">No image yet</span></td><td data-tip-name="${esc(name)}" data-tip-kind="char" data-tip-game="ZZZ">${esc(name)}</td><td>${badge(tier)}</td><td>—</td><td>—</td><td>—</td><td>Not in PityHub roster — see TimeSaver list</td></tr>`;
+  if (!r) return `<tr data-prev-name="${esc(name)}" data-prev-kind="char" data-prev-game="ZZZ" data-prev-img="" data-prev-big="" data-prev-ph="No image yet"><td><span class="thumb-ph">No image yet</span></td><td data-tip-name="${esc(name)}" data-tip-kind="char" data-tip-game="ZZZ">${esc(name)}</td><td>${badge(tier)}</td><td>—</td><td>—</td><td>—</td><td>Not in PityHub roster — see TimeSaver list</td></tr>`;
   const status = tier === 'Unranked' ? 'Unranked until playable (11 Nov)' : (r[6] > '2026-11-08' ? 'From 11 Nov 2026' : 'Live');
-  return `<tr><td>${imgCell(ZZZ_AGENT_IMG[name], name, 'No image yet')}</td><td data-tip-name="${esc(name)}" data-tip-kind="char" data-tip-game="ZZZ">${esc(name)}</td><td>${badge(tier)}</td><td>${r[1]}</td><td>${esc(r[2])}</td><td>${esc(r[3])}</td><td>${status}</td></tr>`;
+  return `<tr data-prev-name="${esc(name)}" data-prev-kind="char" data-prev-game="ZZZ" data-prev-img="${ZZZ_AGENT_IMG[name] || ''}" data-prev-big="${ZZZ_AGENT_BIG[name] || ''}" data-prev-ph="No image yet"><td>${imgCell(ZZZ_AGENT_IMG[name], name, 'No image yet')}</td><td data-tip-name="${esc(name)}" data-tip-kind="char" data-tip-game="ZZZ">${esc(name)}</td><td>${badge(tier)}</td><td>${r[1]}</td><td>${esc(r[2])}</td><td>${esc(r[3])}</td><td>${status}</td></tr>`;
 }).join('');
 document.getElementById('nteTierRows').innerHTML = NTE_TIERS.map(([tier, name]) => {
   const r = nteByName[name];
   const status = tier === 'Unranked' ? 'Unranked until playable (11 Nov)' : r[5];
   const ph = (name === 'Elyms' || name === 'Exe') ? 'Image coming with v1.5 (11 Nov)' : 'No image yet';
-  return `<tr><td>${imgCell(NTE_CHAR_IMG[name], name, ph)}</td><td data-tip-name="${esc(name)}" data-tip-kind="char" data-tip-game="NTE">${esc(name)}</td><td>${badge(tier)}</td><td>${r[1]}</td><td>${esc(r[2])}</td><td>${esc(r[4])}</td><td>${esc(status)}</td></tr>`;
+  return `<tr data-prev-name="${esc(name)}" data-prev-kind="char" data-prev-game="NTE" data-prev-img="${NTE_CHAR_IMG[name] || ''}" data-prev-big="" data-prev-ph="${esc(ph)}"><td>${imgCell(NTE_CHAR_IMG[name], name, ph)}</td><td data-tip-name="${esc(name)}" data-tip-kind="char" data-tip-game="NTE">${esc(name)}</td><td>${badge(tier)}</td><td>${r[1]}</td><td>${esc(r[2])}</td><td>${esc(r[4])}</td><td>${esc(status)}</td></tr>`;
 }).join('');
 initTooltips();
 </script>
