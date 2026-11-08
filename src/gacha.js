@@ -104,3 +104,34 @@ export function worstCaseCost(game, target = 'featured') {
   const cfg = game === 'NTE' ? NTE : ZZZ;
   return { pulls, cost: pulls * cfg.costPerPull, currency: cfg.currency };
 }
+
+// Map a decided pull rank to a concrete identity (real character / W-Engine).
+// This changes NO probability: callers first decide the rank with pullOnce()
+// (or the W-Engine rate), then map it here. Uniform pick inside a pool, using
+// the passed rand() so the mapping is seedable/testable like the math.
+// ctx: { featured: {name, rank, img, detail} | null, featuredWon: bool,
+//        poolStdS: [identity], poolA: [identity], poolB: [identity] }
+// identity: { name, rank, img (URL string or null), detail (e.g. "Fire · Anomaly") }
+// Returns { name, rank, featured, offBanner, img, detail }.
+export function mapPull(rank, ctx, rand = Math.random) {
+  const pick = (pool) => pool[Math.floor(rand() * pool.length)];
+  if (rank === 'S') {
+    if (ctx.featuredWon && ctx.featured) {
+      return { ...ctx.featured, featured: true, offBanner: false };
+    }
+    const hit = ctx.poolStdS && ctx.poolStdS.length ? pick(ctx.poolStdS) : null;
+    if (hit) return { ...hit, featured: false, offBanner: true };
+    if (ctx.featured) return { ...ctx.featured, featured: true, offBanner: false };
+    return { name: 'S-rank pull', rank: 'S', featured: false, offBanner: false, img: null, detail: '' };
+  }
+  if (rank === 'B') {
+    const pool = ctx.poolB && ctx.poolB.length ? ctx.poolB : ctx.poolA;
+    const hit = pool && pool.length ? pick(pool) : null;
+    if (hit) return { ...hit, featured: false, offBanner: false };
+    return { name: 'B-rank pull', rank: 'B', featured: false, offBanner: false, img: null, detail: '' };
+  }
+  // 'A' (and any other non-S rank in this model).
+  const hit = ctx.poolA && ctx.poolA.length ? pick(ctx.poolA) : null;
+  if (hit) return { ...hit, featured: false, offBanner: false };
+  return { name: 'A-rank pull', rank: 'A', featured: false, offBanner: false, img: null, detail: '' };
+}
