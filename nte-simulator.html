@@ -47,16 +47,47 @@
 <a href="damage-calculator.html">Damage Calculator</a>
 <a href="banner-schedule.html">Banners</a>
 </nav><span class="navnote">More games coming soon</span></div></header>
-<main>
+<main class="sim sim-nte">
 <noscript><p class="warn">This page needs JavaScript enabled: the databases, simulators and calculators render in your browser. Please enable JavaScript and reload.</p></noscript>
 <h1>NTE Wish Simulator — v1.5</h1>
+<section class="sim-hero" aria-label="Featured banner">
+  <div class="sim-hero-body">
+    <p class="sim-hero-eyebrow">Scarborough Fair · Neverness to Everness v1.5</p>
+    <h2 class="sim-hero-name" id="heroName">Elyms</h2>
+    <div class="sim-hero-badges" id="heroBadges"><span class="badge s">S-Rank</span><span class="badge">Cosmos</span><span class="badge">Solid</span></div>
+    <p class="sim-hero-dates" id="heroDates">“Android Dreams” · 11 Nov – 2 Dec 2026</p>
+    <div class="rate-chips"><span class="rate-chip">S base 0.99%</span><span class="rate-chip">Hard pity 90</span><span class="rate-chip">No 50/50</span><span class="rate-chip">160 Annulith / pull</span><span class="rate-chip unverified">Community model — unverified</span></div>
+    <p class="sim-hero-rerun" id="heroRerun">Rerun: <img src="https://nte.wiki/images/characters/shinku.webp" alt=""> Shinku (S / Cosmos / Condensate)</p>
+  </div>
+  <div class="sim-hero-media"><div class="sim-hero-ph"><span class="big-s">S</span><span class="ph-init" id="heroInit">Elyms</span><span class="ph-note">Official artwork not available yet — image coming with v1.5 (11 Nov)</span></div></div>
+</section>
 <p>Simulate the Scarborough Fair character banner. Current banners: <strong>Phase 1 “Android Dreams” — <span class="tip-name" data-tip-name="Elyms" data-tip-kind="char" data-tip-game="NTE">Elyms</span></strong> (S / Cosmos / Solid), 11 Nov–2 Dec 2026, and <strong>Phase 2 “Offline Equations” — <span class="tip-name" data-tip-name="Exe" data-tip-kind="char" data-tip-game="NTE">Exe</span></strong> (S / Chaos / Plasma), 2–23 Dec 2026. Reruns: <span class="tip-name" data-tip-name="Shinku" data-tip-kind="char" data-tip-game="NTE">Shinku</span> (Phase 1), <span class="tip-name" data-tip-name="Chaos" data-tip-kind="char" data-tip-game="NTE">Chaos</span> (Phase 2).</p>
-<div class="warn"><strong>Rates are community-modelled / UNVERIFIED.</strong> No official Hotta / Perfect World rate sheet was found. Model used: S base 0.99% (pulls 1–70), 19.59% flat on pulls 71–89, hard pity 90. Base rate is disputed (0.6% in a CBT-era table vs 0.99% in the current community model). No 50/50 on limited character banners — any S pulled is the featured character. Pity is shared across limited boards. A-rank or higher guaranteed every 10 pulls. 160 Annulith per pull.</div>
-<div class="card">
+<div class="rates-panel">
+<h3>Rates — community-modelled / UNVERIFIED</h3>
+<p>No official Hotta / Perfect World rate sheet was found. Model used: S base 0.99% (pulls 1–70), 19.59% flat on pulls 71–89, hard pity 90. Base rate is disputed (0.6% in a CBT-era table vs 0.99% in the current community model). No 50/50 on limited character banners — any S pulled is the featured character. Pity is shared across limited boards. A-rank or higher guaranteed every 10 pulls. 160 Annulith per pull.</p>
+</div>
+<div class="card sim-card">
+<div class="sim-controls">
+<div>
 <label for="banner">Banner</label>
 <select id="banner"><option value="Elyms">Phase 1 — Elyms (11 Nov–2 Dec)</option><option value="Exe">Phase 2 — Exe (2–23 Dec)</option></select>
-<button id="p1">Pull ×1</button><button id="p10">Pull ×10</button><button id="reset" class="ghost">Reset session</button>
-<p class="result" id="stats">Pulls: 0 &nbsp;•&nbsp; S pulled: 0 &nbsp;•&nbsp; Pity: 0 &nbsp;•&nbsp; Spent: 0 Annulith</p>
+</div>
+</div>
+<div class="pity-meter" role="img" aria-label="Pity progress"><div class="pity-fill" id="pityFill"></div><div class="pity-mark" id="pityMark" title="Soft pity starts here"></div></div>
+<div class="pity-label"><span><b id="pityLabel">Pity 0 / 90</b></span><span id="pitySoft">Soft pity from pull 71 (community model)</span></div>
+<div class="stat-tiles">
+<div class="stat-tile"><span class="num" id="stPulls">0</span><span class="lbl">Pulls</span></div>
+<div class="stat-tile gold"><span class="num" id="stS">0</span><span class="lbl">S pulled</span></div>
+<div class="stat-tile"><span class="num" id="stPity">0</span><span class="lbl">Pity</span></div>
+<div class="stat-tile"><span class="num" id="stSpent">0</span><span class="lbl">Annulith spent</span></div>
+</div>
+<div class="sim-actions">
+<button id="p10" class="btn-gold">Pull ×10</button>
+<button id="p1" class="btn-sec">Pull ×1</button>
+<button id="reset" class="ghost">Reset session</button>
+</div>
+<div class="pull-grid" id="pulls"><div class="pulls-empty">Press Pull ×1 or Pull ×10 to start pulling.</div></div>
+<p class="pull-log-h">Pull log</p>
 <pre id="log">Press Pull to start. Each line is one 10-pull or single pull; S = S-rank, A = non-S pull (A-rank or higher in this simplified model; B-ranks are not modelled).</pre>
 <p class="note">Average: ≈ 53.2 pulls per S (community model, unverified). Worst case for a featured S: 90 pulls = 14,400 Annulith. Character + signature Arc worst case: 170 pulls = 27,200 Annulith (Arc hard pity 80 pulls). See the <a href="pity-tracker.html">Pity Tracker</a> for exact odds at your current pity.</p>
 </div>
@@ -65,24 +96,76 @@
 <script type="module">
 import { pullOnce, NTE } from './src/gacha.js';
 import { initTooltips } from './src/tooltip.js';
+import { NTE_CHAR_IMG } from './src/characters.js';
 initTooltips();
-const log = document.getElementById('log'), stats = document.getElementById('stats'), banner = document.getElementById('banner');
+// Banner hero data. Elyms/Exe have no verified image yet (nte.wiki is stale at
+// v1.2), so the hero uses a placeholder panel; the rerun icons below are real.
+const HERO = {
+  Elyms: { name: 'Elyms', badges: ['S-Rank', 'Cosmos', 'Solid'], dates: '“Android Dreams” · 11 Nov – 2 Dec 2026', rerun: { name: 'Shinku', sub: 'S / Cosmos / Condensate', img: NTE_CHAR_IMG['Shinku'] } },
+  Exe: { name: 'Exe', badges: ['S-Rank', 'Chaos', 'Plasma'], dates: '“Offline Equations” · 2 – 23 Dec 2026', rerun: { name: 'Chaos', sub: 'S / Lakshana / Condensate', img: NTE_CHAR_IMG['Chaos'] } },
+};
+const banner = document.getElementById('banner');
+const heroName = document.getElementById('heroName'), heroBadges = document.getElementById('heroBadges'),
+  heroDates = document.getElementById('heroDates'), heroRerun = document.getElementById('heroRerun'),
+  heroInit = document.getElementById('heroInit');
+function updateHero() {
+  const h = HERO[banner.value];
+  heroName.textContent = h.name;
+  heroInit.textContent = h.name;
+  heroBadges.innerHTML = h.badges.map((b, i) => `<span class="badge${i === 0 ? ' s' : ''}">${b}</span>`).join('');
+  heroDates.textContent = h.dates;
+  heroRerun.innerHTML = `Rerun: <img src="${h.rerun.img}" alt=""> ${h.rerun.name} (${h.rerun.sub})`;
+}
+banner.onchange = updateHero;
+updateHero();
+const log = document.getElementById('log'), pullsEl = document.getElementById('pulls'),
+  pityFill = document.getElementById('pityFill'), pityMark = document.getElementById('pityMark'),
+  pityLabel = document.getElementById('pityLabel');
 let pity = 0, pityA = 0, total = 0, s = 0; // pityA: pulls since last A-rank or higher (10-pull A floor)
-function render(res) {
-  stats.textContent = `Pulls: ${total}  •  S pulled: ${s}  •  Pity: ${pity}  •  Spent: ${total * NTE.costPerPull} Annulith`;
+function cardFor(kind) {
+  if (kind === 'S') return { cls: 'rar-s', tag: '★ Featured S', name: banner.value, img: null };
+  return { cls: 'rar-a', tag: 'A-rank', name: 'A-rank pull', img: null };
+}
+function renderCards(cards) {
+  pullsEl.innerHTML = '';
+  cards.forEach((c, i) => {
+    const d = document.createElement('div');
+    d.className = 'pull-card ' + c.cls;
+    d.style.animationDelay = (i * 60) + 'ms';
+    d.innerHTML = `<span class="pc-tile">${c.cls === 'rar-s' ? 'S' : 'A'}</span>`
+      + `<span class="pc-tag">${c.tag}</span><span class="pc-name">${c.name}</span>`;
+    pullsEl.appendChild(d);
+  });
+}
+function render(res, cards) {
+  document.getElementById('stPulls').textContent = total;
+  document.getElementById('stS').textContent = s;
+  document.getElementById('stPity').textContent = pity;
+  document.getElementById('stSpent').textContent = total * NTE.costPerPull;
+  pityFill.style.width = Math.min(100, pity / NTE.hardPity * 100) + '%';
+  pityMark.style.left = (70 / NTE.hardPity * 100) + '%';
+  pityLabel.textContent = `Pity ${pity} / ${NTE.hardPity}`;
+  if (cards) renderCards(cards);
   if (res) log.textContent = `${banner.value}: ${res.join(' ')}\n` + (log.textContent.startsWith('Press') ? '' : log.textContent);
 }
 function doPulls(n) {
-  const res = [];
+  const res = [], cards = [];
   for (let i = 0; i < n; i++) {
     const r = pullOnce('NTE', pity, Math.random, pityA); res.push(r); total++;
     if (r === 'S') { pity = 0; pityA = 0; s++; } else { pity++; pityA = 0; }
+    cards.push(cardFor(r));
   }
-  render(res);
+  render(res, cards);
 }
 document.getElementById('p1').onclick = () => doPulls(1);
 document.getElementById('p10').onclick = () => doPulls(10);
-document.getElementById('reset').onclick = () => { pity = 0; pityA = 0; total = 0; s = 0; log.textContent = 'Session reset. Press Pull to start.'; render(); };
+document.getElementById('reset').onclick = () => {
+  pity = 0; pityA = 0; total = 0; s = 0;
+  pullsEl.innerHTML = '<div class="pulls-empty">Press Pull ×1 or Pull ×10 to start pulling.</div>';
+  log.textContent = 'Session reset. Press Pull to start.';
+  render();
+};
+render();
 </script>
 <script src="src/nav.js" defer></script>
 </body>

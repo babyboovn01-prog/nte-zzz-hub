@@ -47,18 +47,57 @@
 <a href="damage-calculator.html">Damage Calculator</a>
 <a href="banner-schedule.html">Banners</a>
 </nav><span class="navnote">More games coming soon</span></div></header>
-<main>
+<main class="sim sim-zzz">
 <noscript><p class="warn">This page needs JavaScript enabled: the databases, simulators and calculators render in your browser. Please enable JavaScript and reload.</p></noscript>
 <h1>ZZZ Wish Simulator — v3.3 Phase 2</h1>
+<section class="sim-hero" aria-label="Featured banner">
+  <div class="sim-hero-body">
+    <p class="sim-hero-eyebrow">Exclusive Channel · Zenless Zone Zero v3.3</p>
+    <h2 class="sim-hero-name" id="heroName">Severian Lowell</h2>
+    <div class="sim-hero-badges" id="heroBadges"><span class="badge s">S-Rank</span><span class="badge">Wind</span><span class="badge">Attack</span></div>
+    <p class="sim-hero-dates" id="heroDates">“Answers in the Wind” · 11 Nov 12:00 – 1 Dec 14:59 server time</p>
+    <div class="rate-chips"><span class="rate-chip">S base 0.6% / 1.6% consolidated</span><span class="rate-chip">Hard pity 90</span><span class="rate-chip">50/50</span><span class="rate-chip">160 Polychrome / pull</span></div>
+    <p class="sim-hero-rerun" id="heroRerun">Rerun: <img src="https://enka.network/ui/zzz/IconRoleCircle65.png" alt=""> Norma Hollowell (S / Fire / Stun)</p>
+  </div>
+  <div class="sim-hero-media"><img id="heroImg" src="https://enka.network/ui/zzz/IconRole1631.png" alt="Severian Lowell splash art" width="640" height="640" loading="eager"></div>
+</section>
 <p>Simulate the Exclusive Channel (Signal Search). Current banner: <strong>“Answers in the Wind” — <span class="tip-name" data-tip-name="Severian Lowell" data-tip-kind="char" data-tip-game="ZZZ">Severian Lowell</span></strong> (S / Wind / Attack), 11 Nov 12:00 – 1 Dec 14:59 server time. Rerun: <span class="tip-name" data-tip-name="Norma Hollowell" data-tip-kind="char" data-tip-game="ZZZ">Norma Hollowell</span> (S / Fire / Stun). W-Engines: <span class="tip-name" data-tip-name="Incarcerating Grip" data-tip-kind="w">Incarcerating Grip</span> (new), <span class="tip-name" data-tip-name="Chief Sidekick" data-tip-kind="w">Chief Sidekick</span> (rerun).</p>
-<div class="warn"><strong>Rates:</strong> S base 0.6% / 1.6% consolidated and hard pity 90 are from the in-game Signal Search Details screen (HoYoverse). <strong>Soft pity is community-measured, not published by HoYoverse:</strong> ramp from pull 74, +6% per pull (GachaPity model; sources differ 74 vs 75). 50/50 applies — lose it once and the next S is guaranteed featured. A-rank or higher at least once per 10 pulls. 160 Polychrome per pull. <strong>W-Engine channel:</strong> S base 1.0% / consolidated 2.0% (official), hard pity 80, 75/25. Soft pity is community-estimated to start at pull 64–65 — no verified ramp step is published, so this simulator uses the official 1.0% base rate until hard pity.</div>
-<div class="card">
-<label for="channel">Channel</label>
-<select id="channel"><option value="agent">Agent — Exclusive Channel (Severian / Phoenix)</option><option value="wengine">W-Engine — W-Engine Channel (Incarcerating Grip / Chief Sidekick)</option></select>
+<div class="rates-panel">
+<h3>Rates</h3>
+<p>S base 0.6% / 1.6% consolidated and hard pity 90 are from the in-game Signal Search Details screen (HoYoverse). <strong>Soft pity is community-measured, not published by HoYoverse:</strong> ramp from pull 74, +6% per pull (GachaPity model; sources differ 74 vs 75). 50/50 applies — lose it once and the next S is guaranteed featured. A-rank or higher at least once per 10 pulls. 160 Polychrome per pull.</p>
+<p><strong>W-Engine channel:</strong> S base 1.0% / consolidated 2.0% (official), hard pity 80, 75/25. Soft pity is community-estimated to start at pull 64–65 — no verified ramp step is published, so this simulator uses the official 1.0% base rate until hard pity.</p>
+</div>
+<div class="card sim-card">
+<div class="sim-controls">
+<div>
+<span class="ctl-label" id="channelLabel">Channel</span>
+<div class="pill-tabs" role="group" aria-label="Channel">
+<button type="button" class="pill-tab active" data-channel="agent" aria-pressed="true">Agent — Severian / Phoenix</button>
+<button type="button" class="pill-tab" data-channel="wengine" aria-pressed="false">W-Engine — Incarcerating Grip</button>
+</div>
+</div>
+<div>
 <label for="banner">Banner</label>
 <select id="banner"><option value="Severian">Phase 2 — Severian (11 Nov–1 Dec)</option><option value="Phoenix">Phase 1 — Phoenix (ends 11 Nov 11:59)</option></select>
-<button id="p1">Pull ×1</button><button id="p10">Pull ×10</button><button id="reset" class="ghost">Reset session</button>
-<p class="result" id="stats">Pulls: 0 &nbsp;•&nbsp; S pulled: 0 &nbsp;•&nbsp; Featured won: 0 &nbsp;•&nbsp; 50/50 lost: 0 &nbsp;•&nbsp; Pity: 0 &nbsp;•&nbsp; Spent: 0 Polychrome</p>
+</div>
+</div>
+<div class="pity-meter" role="img" aria-label="Pity progress"><div class="pity-fill" id="pityFill"></div><div class="pity-mark" id="pityMark" title="Soft pity starts here"></div></div>
+<div class="pity-label"><span><b id="pityLabel">Pity 0 / 90</b></span><span id="pitySoft">Soft pity (community): from pull 74</span></div>
+<div class="stat-tiles">
+<div class="stat-tile"><span class="num" id="stPulls">0</span><span class="lbl">Pulls</span></div>
+<div class="stat-tile gold"><span class="num" id="stS">0</span><span class="lbl">S pulled</span></div>
+<div class="stat-tile"><span class="num" id="stWon">0</span><span class="lbl">Featured won</span></div>
+<div class="stat-tile"><span class="num" id="stLost">0</span><span class="lbl">50/50 or 75/25 lost</span></div>
+<div class="stat-tile"><span class="num" id="stPity">0</span><span class="lbl">Pity</span></div>
+<div class="stat-tile"><span class="num" id="stSpent">0</span><span class="lbl">Polychrome spent</span></div>
+</div>
+<div class="sim-actions">
+<button id="p10" class="btn-gold">Pull ×10</button>
+<button id="p1" class="btn-sec">Pull ×1</button>
+<button id="reset" class="ghost">Reset session</button>
+</div>
+<div class="pull-grid" id="pulls"><div class="pulls-empty">Press Pull ×1 or Pull ×10 to start pulling.</div></div>
+<p class="pull-log-h">Pull log</p>
 <pre id="log">Press Pull to start. S★ = featured S (won the 50/50 or 75/25, or guaranteed), S = off-banner S (lost the 50/50 or 75/25), A = non-S pull (A-rank or higher in this simplified model; B-ranks are not modelled).</pre>
 <p class="note">Worst case for a featured Agent: 180 pulls = 28,800 Polychrome. Worst case for a featured W-Engine: 160 pulls = 25,600 Polychrome (lose the 75/25 once). Guaranteed S (any): 90 pulls = 14,400 Polychrome. Median: 76 pulls to an Agent S (community-measured). See the <a href="pity-tracker.html">Pity Tracker</a> for exact odds at your current pity.</p>
 </div>
@@ -67,21 +106,95 @@
 <script type="module">
 import { pullOnce, zzzWengineRate, ZZZ, ZZZ_WENGINE } from './src/gacha.js';
 import { initTooltips } from './src/tooltip.js';
+import { ZZZ_AGENT_IMG, ZZZ_AGENT_BIG } from './src/characters.js';
+import { ZZZ_WENGINE_IMG } from './src/items.js';
 initTooltips();
-const log = document.getElementById('log'), stats = document.getElementById('stats'), banner = document.getElementById('banner'), channelEl = document.getElementById('channel');
+// Banner hero data (images: Enka.Network, checked 8 Nov 2026).
+const HERO = {
+  Severian: { name: 'Severian Lowell', badges: ['S-Rank', 'Wind', 'Attack'], dates: '“Answers in the Wind” · 11 Nov 12:00 – 1 Dec 14:59 server time', img: ZZZ_AGENT_BIG['Severian Lowell'], alt: 'Severian Lowell splash art', rerun: { name: 'Norma Hollowell', sub: 'S / Fire / Stun', img: ZZZ_AGENT_IMG['Norma Hollowell'] } },
+  Phoenix: { name: 'Phoenix Reffaella', badges: ['S-Rank', 'Fire', 'Anomaly'], dates: 'Phase 1 · 21 Oct – 11 Nov 11:59 server time', img: ZZZ_AGENT_BIG['Phoenix Reffaella'], alt: 'Phoenix Reffaella splash art', rerun: { name: 'Velina Airgid', sub: 'S / Wind / Anomaly', img: ZZZ_AGENT_IMG['Velina Airgid'] } },
+};
+const banner = document.getElementById('banner');
+const heroName = document.getElementById('heroName'), heroBadges = document.getElementById('heroBadges'),
+  heroDates = document.getElementById('heroDates'), heroRerun = document.getElementById('heroRerun'),
+  heroImg = document.getElementById('heroImg');
+function updateHero() {
+  const h = HERO[banner.value];
+  heroName.textContent = h.name;
+  heroBadges.innerHTML = h.badges.map((b, i) => `<span class="badge${i === 0 ? ' s' : ''}">${b}</span>`).join('');
+  heroDates.textContent = h.dates;
+  heroRerun.innerHTML = `Rerun: <img src="${h.rerun.img}" alt=""> ${h.rerun.name} (${h.rerun.sub})`;
+  heroImg.alt = h.alt;
+  heroImg.src = h.img;
+}
+heroImg.onerror = () => { // fall back to the small circle icon if the splash fails
+  heroImg.onerror = null;
+  heroImg.src = ZZZ_AGENT_IMG[HERO[banner.value].name];
+};
+banner.onchange = updateHero;
+updateHero();
+// Channel pill tabs (replaces the old Channel <select>).
+let channel = 'agent';
+const pillTabs = Array.from(document.querySelectorAll('.pill-tab'));
+function setChannel(c) {
+  channel = c;
+  pillTabs.forEach(b => {
+    const on = b.dataset.channel === c;
+    b.classList.toggle('active', on);
+    b.setAttribute('aria-pressed', on ? 'true' : 'false');
+  });
+  render();
+}
+pillTabs.forEach(b => { b.onclick = () => setChannel(b.dataset.channel); });
+const log = document.getElementById('log'), pullsEl = document.getElementById('pulls'),
+  pityFill = document.getElementById('pityFill'), pityMark = document.getElementById('pityMark'),
+  pityLabel = document.getElementById('pityLabel'), pitySoft = document.getElementById('pitySoft');
 // Pity is tracked per channel (Agent and W-Engine channels have separate pity).
 // pityA tracks pulls since the last A-rank or higher (the 10-pull A floor);
 // every non-S pull in this model is an A-rank, so it resets on every pull.
 let pity = 0, pityW = 0, pityA = 0, pityAW = 0, total = 0, s = 0, won = 0, lost = 0, guaranteed = false, guaranteedW = false;
-function render(res) {
-  const pityNow = channelEl.value === 'wengine' ? pityW : pity;
-  stats.textContent = `Pulls: ${total}  •  S pulled: ${s}  •  Featured won: ${won}  •  50/50 or 75/25 lost: ${lost}  •  Pity: ${pityNow}  •  Spent: ${total * ZZZ.costPerPull} Polychrome`;
-  if (res) log.textContent = `${channelEl.value === 'wengine' ? 'W-Engine' : banner.value}: ${res.join(' ')}
+function cardFor(kind, isW) {
+  if (kind === 'S★') {
+    if (isW) return { cls: 'rar-s', tag: '★ Featured S', name: 'Incarcerating Grip', img: ZZZ_WENGINE_IMG['Incarcerating Grip'] };
+    const f = HERO[banner.value];
+    return { cls: 'rar-s', tag: '★ Featured S', name: f.name, img: ZZZ_AGENT_IMG[f.name] };
+  }
+  if (kind === 'S') return { cls: 'rar-s', tag: 'Off-banner S', name: isW ? 'Off-banner S W-Engine' : 'Off-banner S Agent', img: null };
+  return { cls: 'rar-a', tag: 'A-rank', name: isW ? 'A-rank W-Engine' : 'A-rank Agent', img: null };
+}
+function renderCards(cards) {
+  pullsEl.innerHTML = '';
+  cards.forEach((c, i) => {
+    const d = document.createElement('div');
+    d.className = 'pull-card ' + c.cls;
+    d.style.animationDelay = (i * 60) + 'ms';
+    d.innerHTML = (c.img ? `<img src="${c.img}" alt="" loading="lazy">` : `<span class="pc-tile">${c.cls === 'rar-s' ? 'S' : 'A'}</span>`)
+      + `<span class="pc-tag">${c.tag}</span><span class="pc-name">${c.name}</span>`;
+    pullsEl.appendChild(d);
+  });
+}
+function render(res, cards) {
+  const isW = channel === 'wengine';
+  const pityNow = isW ? pityW : pity;
+  const hard = isW ? ZZZ_WENGINE.hardPity : ZZZ.hardPity;
+  const softStart = isW ? 64 : 73;
+  document.getElementById('stPulls').textContent = total;
+  document.getElementById('stS').textContent = s;
+  document.getElementById('stWon').textContent = won;
+  document.getElementById('stLost').textContent = lost;
+  document.getElementById('stPity').textContent = pityNow;
+  document.getElementById('stSpent').textContent = total * ZZZ.costPerPull;
+  pityFill.style.width = Math.min(100, pityNow / hard * 100) + '%';
+  pityMark.style.left = (softStart / hard * 100) + '%';
+  pityLabel.textContent = `Pity ${pityNow} / ${hard}`;
+  pitySoft.textContent = isW ? 'Soft pity (community estimate): from pull 64–65' : 'Soft pity (community): from pull 74';
+  if (cards) renderCards(cards);
+  if (res) log.textContent = `${isW ? 'W-Engine' : banner.value}: ${res.join(' ')}
 ` + (log.textContent.startsWith('Press') ? '' : log.textContent);
 }
 function doPulls(n) {
-  const res = [];
-  const isW = channelEl.value === 'wengine';
+  const res = [], cards = [];
+  const isW = channel === 'wengine';
   for (let i = 0; i < n; i++) {
     total++;
     if (isW) {
@@ -98,12 +211,19 @@ function doPulls(n) {
         else { res.push('S'); lost++; guaranteed = true; }
       } else { pity++; pityA = 0; res.push('A'); }
     }
+    cards.push(cardFor(res[res.length - 1], isW));
   }
-  render(res);
+  render(res, cards);
 }
 document.getElementById('p1').onclick = () => doPulls(1);
 document.getElementById('p10').onclick = () => doPulls(10);
-document.getElementById('reset').onclick = () => { pity = 0; pityW = 0; pityA = 0; pityAW = 0; total = 0; s = 0; won = 0; lost = 0; guaranteed = false; guaranteedW = false; log.textContent = 'Session reset. Press Pull to start.'; render(); };
+document.getElementById('reset').onclick = () => {
+  pity = 0; pityW = 0; pityA = 0; pityAW = 0; total = 0; s = 0; won = 0; lost = 0; guaranteed = false; guaranteedW = false;
+  pullsEl.innerHTML = '<div class="pulls-empty">Press Pull ×1 or Pull ×10 to start pulling.</div>';
+  log.textContent = 'Session reset. Press Pull to start.';
+  render();
+};
+render();
 </script>
 <script src="src/nav.js" defer></script>
 </body>
