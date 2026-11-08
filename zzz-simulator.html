@@ -166,7 +166,10 @@ function cardFor(rank, won, isW, id) {
   const tag = id.rank === 'S'
     ? (id.featured ? '★ Featured S' : 'Off-banner S')
     : (isW ? `${id.rank}-rank W-Engine` : `${id.rank}-rank Agent`);
-  return { cls, tag, name: id.name, img: id.img, detail: id.detail, rank: id.rank, featured: id.featured };
+  // Agent S pulls show the full splash art; W-Engine S keeps its item image,
+  // A pulls keep the small circle icon. big is null unless a splash exists.
+  const big = (id.rank === 'S' && !isW) ? (ZZZ_AGENT_BIG[id.name] || null) : null;
+  return { cls, tag, name: id.name, img: id.img, big, detail: id.detail, rank: id.rank, featured: id.featured };
 }
 function renderCards(cards) {
   pullsEl.innerHTML = '';
@@ -174,7 +177,12 @@ function renderCards(cards) {
     const d = document.createElement('div');
     d.className = 'pull-card ' + c.cls;
     d.style.animationDelay = (i * 60) + 'ms';
-    d.innerHTML = (c.img ? `<img src="${c.img}" alt="${c.name}" loading="lazy">` : `<span class="pc-tile">${c.rank}</span>`)
+    // S agent cards use the big splash; if it fails to load, fall back to the
+    // circle icon (every ZZZ agent has one, so c.img is set whenever c.big is).
+    const imgHtml = c.big
+      ? `<img class="pc-big" src="${c.big}" alt="${c.name}" loading="lazy" onerror="this.onerror=null;this.src='${c.img}';this.classList.remove('pc-big');">`
+      : (c.img ? `<img src="${c.img}" alt="${c.name}" loading="lazy">` : `<span class="pc-tile">${c.rank}</span>`);
+    d.innerHTML = imgHtml
       + `<span class="pc-tag">${c.tag}</span><span class="pc-name">${c.name}</span>`
       + (c.detail ? `<span class="pc-detail">${c.detail}</span>` : '');
     pullsEl.appendChild(d);
