@@ -61,7 +61,7 @@
   </div>
   <div class="sim-hero-media"><img id="heroImg" src="https://enka.network/ui/zzz/IconRole1631.png" alt="Severian Lowell splash art" width="640" height="640" loading="eager"></div>
 </section>
-<p>Simulate the Exclusive Channel (Signal Search). Current banner: <strong>“Answers in the Wind” — <span class="tip-name" data-tip-name="Severian Lowell" data-tip-kind="char" data-tip-game="ZZZ">Severian Lowell</span></strong> (S / Wind / Attack), 11 Nov 12:00 – 1 Dec 14:59 server time. Rerun: <span class="tip-name" data-tip-name="Norma Hollowell" data-tip-kind="char" data-tip-game="ZZZ">Norma Hollowell</span> (S / Fire / Stun). W-Engines: <span class="tip-name" data-tip-name="Incarcerating Grip" data-tip-kind="w">Incarcerating Grip</span> (new), <span class="tip-name" data-tip-name="Chief Sidekick" data-tip-kind="w">Chief Sidekick</span> (rerun).</p>
+<p id="heroDesc">Simulate the Exclusive Channel (Signal Search). Current banner: <strong>“Answers in the Wind” — <span class="tip-name" data-tip-name="Severian Lowell" data-tip-kind="char" data-tip-game="ZZZ">Severian Lowell</span></strong> (S / Wind / Attack), 11 Nov 12:00 – 1 Dec 14:59 server time. Rerun: <span class="tip-name" data-tip-name="Norma Hollowell" data-tip-kind="char" data-tip-game="ZZZ">Norma Hollowell</span> (S / Fire / Stun). W-Engines: <span class="tip-name" data-tip-name="Incarcerating Grip" data-tip-kind="w">Incarcerating Grip</span> (new), <span class="tip-name" data-tip-name="Chief Sidekick" data-tip-kind="w">Chief Sidekick</span> (rerun).</p>
 <div class="rates-panel">
 <h3>Rates</h3>
 <p>S base 0.6% / 1.6% consolidated and hard pity 90 are from the in-game Signal Search Details screen (HoYoverse). <strong>Soft pity is community-measured, not published by HoYoverse:</strong> ramp from pull 74, +6% per pull (GachaPity model; sources differ 74 vs 75). 50/50 applies — lose it once and the next S is guaranteed featured. A-rank or higher at least once per 10 pulls. 160 Polychrome per pull.</p>
@@ -105,24 +105,28 @@
 <footer>PityHub — NTE + ZZZ Hub. Data checked 8 Nov 2026. Not affiliated with HoYoverse. Character/item artwork © HoYoverse / Hotta Studio &amp; Perfect World. <nav class="footnav"><a href="about.html">About</a> &middot; <a href="privacy.html">Privacy</a> &middot; <a href="contact.html">Contact</a></nav></footer>
 <script type="module">
 import { pullOnce, zzzWengineRate, ZZZ, ZZZ_WENGINE } from './src/gacha.js';
-import { initTooltips } from './src/tooltip.js';
+import { initTooltips, refreshTips } from './src/tooltip.js';
 import { ZZZ_AGENT_IMG, ZZZ_AGENT_BIG } from './src/characters.js';
 import { ZZZ_WENGINE_IMG } from './src/items.js';
 initTooltips();
 // Banner hero data (images: Enka.Network, checked 8 Nov 2026).
 const HERO = {
-  Severian: { name: 'Severian Lowell', badges: ['S-Rank', 'Wind', 'Attack'], dates: '“Answers in the Wind” · 11 Nov 12:00 – 1 Dec 14:59 server time', img: ZZZ_AGENT_BIG['Severian Lowell'], alt: 'Severian Lowell splash art', rerun: { name: 'Norma Hollowell', sub: 'S / Fire / Stun', img: ZZZ_AGENT_IMG['Norma Hollowell'] } },
-  Phoenix: { name: 'Phoenix Reffaella', badges: ['S-Rank', 'Fire', 'Anomaly'], dates: 'Phase 1 · 21 Oct – 11 Nov 11:59 server time', img: ZZZ_AGENT_BIG['Phoenix Reffaella'], alt: 'Phoenix Reffaella splash art', rerun: { name: 'Velina Airgid', sub: 'S / Wind / Anomaly', img: ZZZ_AGENT_IMG['Velina Airgid'] } },
+  Severian: { name: 'Severian Lowell', badges: ['S-Rank', 'Wind', 'Attack'], dates: '“Answers in the Wind” · 11 Nov 12:00 – 1 Dec 14:59 server time', img: ZZZ_AGENT_BIG['Severian Lowell'], alt: 'Severian Lowell splash art', rerun: { name: 'Norma Hollowell', sub: 'S / Fire / Stun', img: ZZZ_AGENT_IMG['Norma Hollowell'] },
+    desc: 'Simulate the Exclusive Channel (Signal Search). Current banner: <strong>“Answers in the Wind” — <span class="tip-name" data-tip-name="Severian Lowell" data-tip-kind="char" data-tip-game="ZZZ">Severian Lowell</span></strong> (S / Wind / Attack), 11 Nov 12:00 – 1 Dec 14:59 server time. Rerun: <span class="tip-name" data-tip-name="Norma Hollowell" data-tip-kind="char" data-tip-game="ZZZ">Norma Hollowell</span> (S / Fire / Stun). W-Engines: <span class="tip-name" data-tip-name="Incarcerating Grip" data-tip-kind="w">Incarcerating Grip</span> (new), <span class="tip-name" data-tip-name="Chief Sidekick" data-tip-kind="w">Chief Sidekick</span> (rerun).' },
+  Phoenix: { name: 'Phoenix Reffaella', badges: ['S-Rank', 'Fire', 'Anomaly'], dates: 'Phase 1 · 21 Oct – 11 Nov 11:59 server time', img: ZZZ_AGENT_BIG['Phoenix Reffaella'], alt: 'Phoenix Reffaella splash art', rerun: { name: 'Velina Airgid', sub: 'S / Wind / Anomaly', img: ZZZ_AGENT_IMG['Velina Airgid'] },
+    desc: 'Simulate the Exclusive Channel (Signal Search). Current banner: <strong>“Into the Flames of Life” — <span class="tip-name" data-tip-name="Phoenix Reffaella" data-tip-kind="char" data-tip-game="ZZZ">Phoenix Reffaella</span></strong> (S / Fire / Anomaly), 21 Oct – 11 Nov 11:59 server time. Rerun: <span class="tip-name" data-tip-name="Velina Airgid" data-tip-kind="char" data-tip-game="ZZZ">Velina Airgid</span> (S / Wind / Anomaly). W-Engines: <span class="tip-name" data-tip-name="Plume of Rebirth" data-tip-kind="w">Plume of Rebirth</span> (new), <span class="tip-name" data-tip-name="Joyau Dore" data-tip-kind="w">Joyau Dore</span> (rerun).' },
 };
 const banner = document.getElementById('banner');
 const heroName = document.getElementById('heroName'), heroBadges = document.getElementById('heroBadges'),
   heroDates = document.getElementById('heroDates'), heroRerun = document.getElementById('heroRerun'),
-  heroImg = document.getElementById('heroImg');
+  heroImg = document.getElementById('heroImg'), heroDesc = document.getElementById('heroDesc');
 function updateHero() {
   const h = HERO[banner.value];
   heroName.textContent = h.name;
   heroBadges.innerHTML = h.badges.map((b, i) => `<span class="badge${i === 0 ? ' s' : ''}">${b}</span>`).join('');
   heroDates.textContent = h.dates;
+  heroDesc.innerHTML = h.desc;
+  refreshTips(); // re-fill data-tip content on the freshly rendered paragraph spans
   heroRerun.innerHTML = `Rerun: <img src="${h.rerun.img}" alt=""> ${h.rerun.name} (${h.rerun.sub})`;
   heroImg.alt = h.alt;
   heroImg.src = h.img;
