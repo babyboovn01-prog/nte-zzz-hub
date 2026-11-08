@@ -70,7 +70,7 @@
 </main>
 <footer>PityHub — NTE + ZZZ Hub. Data checked 8 Nov 2026. Not affiliated with Hotta Studio, Perfect World, or HoYoverse. Character/item artwork © HoYoverse / Hotta Studio &amp; Perfect World. More games coming soon.</footer>
 <script type="module">
-import { NTE_ROSTER, ZZZ_ROSTER, NTE_CHAR_IMG, ZZZ_AGENT_IMG } from './src/characters.js';
+import { NTE_ROSTER, ZZZ_ROSTER, NTE_CHAR_IMG, ZZZ_AGENT_IMG, ZZZ_AGENT_BIG } from './src/characters.js';
 import { initTooltips, refreshTips } from './src/tooltip.js';
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
 const imgCell = (url, name, ph) => url ? `<img class="thumb" src="${url}" alt="${esc(name)}" loading="lazy" width="48" height="48" onerror="this.style.display='none'">` : `<span class="thumb-ph">${ph}</span>`;
@@ -89,8 +89,8 @@ function render() {
   const filt = rows => rows.filter(r => (!q || r.join(' ').toLowerCase().includes(q)) && (!attr || r[2] === attr) && (!rank || r[1] === rank));
   const nte = filt(NTE_ROSTER), zzz = filt(ZZZ_ROSTER);
   const tipCell = (r, game) => `<td data-tip-name="${esc(r[0])}" data-tip-kind="char" data-tip-game="${game}">${esc(r[0])}</td>`;
-  document.getElementById('nteRows').innerHTML = nte.map(r => `<tr><td>${imgCell(NTE_CHAR_IMG[r[0]], r[0], ntePh(r[0]))}</td>${tipCell(r, 'NTE')}${r.slice(1).map(c => `<td>${esc(c)}</td>`).join('')}<td><a href="nte-simulator.html">Simulate →</a></td></tr>`).join('') || '<tr><td colspan="8">No matches.</td></tr>';
-  document.getElementById('zzzRows').innerHTML = zzz.map(r => `<tr><td>${imgCell(ZZZ_AGENT_IMG[r[0]], r[0], 'No image yet')}</td>${tipCell(r, 'ZZZ')}${r.slice(1).map(c => `<td>${esc(c)}</td>`).join('')}<td><a href="zzz-simulator.html">Simulate →</a></td></tr>`).join('') || '<tr><td colspan="9">No matches.</td></tr>';
+  document.getElementById('nteRows').innerHTML = nte.map(r => `<tr data-prev-name="${esc(r[0])}" data-prev-kind="char" data-prev-game="NTE" data-prev-img="${NTE_CHAR_IMG[r[0]] || ''}" data-prev-big="" data-prev-ph="${esc(ntePh(r[0]))}"><td>${imgCell(NTE_CHAR_IMG[r[0]], r[0], ntePh(r[0]))}</td>${tipCell(r, 'NTE')}${r.slice(1).map(c => `<td>${esc(c)}</td>`).join('')}<td><a href="nte-simulator.html">Simulate →</a></td></tr>`).join('') || '<tr><td colspan="8">No matches.</td></tr>';
+  document.getElementById('zzzRows').innerHTML = zzz.map(r => `<tr data-prev-name="${esc(r[0])}" data-prev-kind="char" data-prev-game="ZZZ" data-prev-img="${ZZZ_AGENT_IMG[r[0]] || ''}" data-prev-big="${ZZZ_AGENT_BIG[r[0]] || ''}" data-prev-ph="No image yet"><td>${imgCell(ZZZ_AGENT_IMG[r[0]], r[0], 'No image yet')}</td>${tipCell(r, 'ZZZ')}${r.slice(1).map(c => `<td>${esc(c)}</td>`).join('')}<td><a href="zzz-simulator.html">Simulate →</a></td></tr>`).join('') || '<tr><td colspan="9">No matches.</td></tr>';
   refreshTips();
   document.getElementById('count').textContent = game === 'NTE' ? `Showing ${nte.length} of 26 NTE characters.` : `Showing ${zzz.length} of 62 ZZZ Agents.`;
 }
