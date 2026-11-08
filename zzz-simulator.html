@@ -64,7 +64,7 @@
 <p id="heroDesc">Simulate the Exclusive Channel (Signal Search). Current banner: <strong>“Answers in the Wind” — <span class="tip-name" data-tip-name="Severian Lowell" data-tip-kind="char" data-tip-game="ZZZ">Severian Lowell</span></strong> (S / Wind / Attack), 11 Nov 12:00 – 1 Dec 14:59 server time. Rerun: <span class="tip-name" data-tip-name="Norma Hollowell" data-tip-kind="char" data-tip-game="ZZZ">Norma Hollowell</span> (S / Fire / Stun). W-Engines: <span class="tip-name" data-tip-name="Incarcerating Grip" data-tip-kind="w">Incarcerating Grip</span> (new), <span class="tip-name" data-tip-name="Chief Sidekick" data-tip-kind="w">Chief Sidekick</span> (rerun).</p>
 <div class="rates-panel">
 <h3>Rates</h3>
-<p>S base 0.6% / 1.6% consolidated and hard pity 90 are from the in-game Signal Search Details screen (HoYoverse). <strong>Soft pity is community-measured, not published by HoYoverse:</strong> ramp from pull 74, +6% per pull (GachaPity model; sources differ 74 vs 75). 50/50 applies — lose it once and the next S is guaranteed featured. A-rank or higher at least once per 10 pulls. 160 Polychrome per pull.</p>
+<p>S base 0.6% / 1.6% consolidated and hard pity 90 are from the in-game Signal Search Details screen (HoYoverse). <strong>Soft pity is community-measured, not published by HoYoverse:</strong> ramp from pull 74, +6% per pull (GachaPity model; sources differ 74 vs 75). 50/50 applies — lose it once and the next S is guaranteed featured. A-rank or higher at least once per 10 pulls. 160 Polychrome per pull. <strong>Featured A-ranks are TBD (11 Nov)</strong> — A pulls currently draw from the standard A pool.</p>
 <p><strong>W-Engine channel:</strong> S base 1.0% / consolidated 2.0% (official), hard pity 80, 75/25. Soft pity is community-estimated to start at pull 64–65 — no verified ramp step is published, so this simulator uses the official 1.0% base rate until hard pity.</p>
 </div>
 <div class="card sim-card">
@@ -98,22 +98,23 @@
 </div>
 <div class="pull-grid" id="pulls"><div class="pulls-empty">Press Pull ×1 or Pull ×10 to start pulling.</div></div>
 <p class="pull-log-h">Pull log</p>
-<pre id="log">Press Pull to start. S★ = featured S (won the 50/50 or 75/25, or guaranteed), S = off-banner S (lost the 50/50 or 75/25), A = non-S pull (A-rank or higher in this simplified model; B-ranks are not modelled).</pre>
+<pre id="log">Press Pull to start. S★ = featured S (won the 50/50 or 75/25, or guaranteed), S = off-banner S (lost the 50/50 or 75/25) — both show the real agent / W-Engine name. A = a named A-rank agent / W-Engine from the standard pool. Featured A-ranks are TBD (11 Nov) — A pulls currently draw from the standard A pool. B-ranks are not modelled on the Agent channel.</pre>
 <p class="note">Worst case for a featured Agent: 180 pulls = 28,800 Polychrome. Worst case for a featured W-Engine: 160 pulls = 25,600 Polychrome (lose the 75/25 once). Guaranteed S (any): 90 pulls = 14,400 Polychrome. Median: 76 pulls to an Agent S (community-measured). See the <a href="pity-tracker.html">Pity Tracker</a> for exact odds at your current pity.</p>
 </div>
 </main>
 <footer>PityHub — NTE + ZZZ Hub. Data checked 8 Nov 2026. Not affiliated with HoYoverse. Character/item artwork © HoYoverse / Hotta Studio &amp; Perfect World. <nav class="footnav"><a href="about.html">About</a> &middot; <a href="privacy.html">Privacy</a> &middot; <a href="contact.html">Contact</a></nav></footer>
 <script type="module">
 import { pullOnce, zzzWengineRate, ZZZ, ZZZ_WENGINE } from './src/gacha.js';
+import { mapAgentPull, mapWenginePull } from './src/pullmap.js';
 import { initTooltips, refreshTips } from './src/tooltip.js';
 import { ZZZ_AGENT_IMG, ZZZ_AGENT_BIG } from './src/characters.js';
 import { ZZZ_WENGINE_IMG } from './src/items.js';
 initTooltips();
 // Banner hero data (images: Enka.Network, checked 8 Nov 2026).
 const HERO = {
-  Severian: { name: 'Severian Lowell', badges: ['S-Rank', 'Wind', 'Attack'], dates: '“Answers in the Wind” · 11 Nov 12:00 – 1 Dec 14:59 server time', img: ZZZ_AGENT_BIG['Severian Lowell'], alt: 'Severian Lowell splash art', rerun: { name: 'Norma Hollowell', sub: 'S / Fire / Stun', img: ZZZ_AGENT_IMG['Norma Hollowell'] },
+  Severian: { name: 'Severian Lowell', badges: ['S-Rank', 'Wind', 'Attack'], dates: '“Answers in the Wind” · 11 Nov 12:00 – 1 Dec 14:59 server time', img: ZZZ_AGENT_BIG['Severian Lowell'], alt: 'Severian Lowell splash art', wengine: { name: 'Incarcerating Grip', img: ZZZ_WENGINE_IMG['Incarcerating Grip'] }, rerun: { name: 'Norma Hollowell', sub: 'S / Fire / Stun', img: ZZZ_AGENT_IMG['Norma Hollowell'] },
     desc: 'Simulate the Exclusive Channel (Signal Search). Current banner: <strong>“Answers in the Wind” — <span class="tip-name" data-tip-name="Severian Lowell" data-tip-kind="char" data-tip-game="ZZZ">Severian Lowell</span></strong> (S / Wind / Attack), 11 Nov 12:00 – 1 Dec 14:59 server time. Rerun: <span class="tip-name" data-tip-name="Norma Hollowell" data-tip-kind="char" data-tip-game="ZZZ">Norma Hollowell</span> (S / Fire / Stun). W-Engines: <span class="tip-name" data-tip-name="Incarcerating Grip" data-tip-kind="w">Incarcerating Grip</span> (new), <span class="tip-name" data-tip-name="Chief Sidekick" data-tip-kind="w">Chief Sidekick</span> (rerun).' },
-  Phoenix: { name: 'Phoenix Reffaella', badges: ['S-Rank', 'Fire', 'Anomaly'], dates: 'Phase 1 · 21 Oct – 11 Nov 11:59 server time', img: ZZZ_AGENT_BIG['Phoenix Reffaella'], alt: 'Phoenix Reffaella splash art', rerun: { name: 'Velina Airgid', sub: 'S / Wind / Anomaly', img: ZZZ_AGENT_IMG['Velina Airgid'] },
+  Phoenix: { name: 'Phoenix Reffaella', badges: ['S-Rank', 'Fire', 'Anomaly'], dates: 'Phase 1 · 21 Oct – 11 Nov 11:59 server time', img: ZZZ_AGENT_BIG['Phoenix Reffaella'], alt: 'Phoenix Reffaella splash art', wengine: { name: 'Plume of Rebirth', img: ZZZ_WENGINE_IMG['Plume of Rebirth'] }, rerun: { name: 'Velina Airgid', sub: 'S / Wind / Anomaly', img: ZZZ_AGENT_IMG['Velina Airgid'] },
     desc: 'Simulate the Exclusive Channel (Signal Search). Current banner: <strong>“Into the Flames of Life” — <span class="tip-name" data-tip-name="Phoenix Reffaella" data-tip-kind="char" data-tip-game="ZZZ">Phoenix Reffaella</span></strong> (S / Fire / Anomaly), 21 Oct – 11 Nov 11:59 server time. Rerun: <span class="tip-name" data-tip-name="Velina Airgid" data-tip-kind="char" data-tip-game="ZZZ">Velina Airgid</span> (S / Wind / Anomaly). W-Engines: <span class="tip-name" data-tip-name="Plume of Rebirth" data-tip-kind="w">Plume of Rebirth</span> (new), <span class="tip-name" data-tip-name="Joyau Dore" data-tip-kind="w">Joyau Dore</span> (rerun).' },
 };
 const banner = document.getElementById('banner');
@@ -157,14 +158,15 @@ const log = document.getElementById('log'), pullsEl = document.getElementById('p
 // pityA tracks pulls since the last A-rank or higher (the 10-pull A floor);
 // every non-S pull in this model is an A-rank, so it resets on every pull.
 let pity = 0, pityW = 0, pityA = 0, pityAW = 0, total = 0, s = 0, won = 0, lost = 0, guaranteed = false, guaranteedW = false;
-function cardFor(kind, isW) {
-  if (kind === 'S★') {
-    if (isW) return { cls: 'rar-s', tag: '★ Featured S', name: 'Incarcerating Grip', img: ZZZ_WENGINE_IMG['Incarcerating Grip'] };
-    const f = HERO[banner.value];
-    return { cls: 'rar-s', tag: '★ Featured S', name: f.name, img: ZZZ_AGENT_IMG[f.name] };
-  }
-  if (kind === 'S') return { cls: 'rar-s', tag: 'Off-banner S', name: isW ? 'Off-banner S W-Engine' : 'Off-banner S Agent', img: null };
-  return { cls: 'rar-a', tag: 'A-rank', name: isW ? 'A-rank W-Engine' : 'A-rank Agent', img: null };
+// Each pull is mapped to a real character / W-Engine (see src/pullmap.js).
+// rank: 'S' | 'A' | 'B' decided by the gacha math; won = won the 50/50 (agent)
+// or 75/25 (W-Engine), or guaranteed. Returns a card object for rendering.
+function cardFor(rank, won, isW, id) {
+  const cls = id.rank === 'S' ? 'rar-s' : 'rar-a';
+  const tag = id.rank === 'S'
+    ? (id.featured ? '★ Featured S' : 'Off-banner S')
+    : (isW ? `${id.rank}-rank W-Engine` : `${id.rank}-rank Agent`);
+  return { cls, tag, name: id.name, img: id.img, detail: id.detail, rank: id.rank, featured: id.featured };
 }
 function renderCards(cards) {
   pullsEl.innerHTML = '';
@@ -172,8 +174,9 @@ function renderCards(cards) {
     const d = document.createElement('div');
     d.className = 'pull-card ' + c.cls;
     d.style.animationDelay = (i * 60) + 'ms';
-    d.innerHTML = (c.img ? `<img src="${c.img}" alt="" loading="lazy">` : `<span class="pc-tile">${c.cls === 'rar-s' ? 'S' : 'A'}</span>`)
-      + `<span class="pc-tag">${c.tag}</span><span class="pc-name">${c.name}</span>`;
+    d.innerHTML = (c.img ? `<img src="${c.img}" alt="${c.name}" loading="lazy">` : `<span class="pc-tile">${c.rank}</span>`)
+      + `<span class="pc-tag">${c.tag}</span><span class="pc-name">${c.name}</span>`
+      + (c.detail ? `<span class="pc-detail">${c.detail}</span>` : '');
     pullsEl.appendChild(d);
   });
 }
@@ -193,29 +196,32 @@ function render(res, cards) {
   pityLabel.textContent = `Pity ${pityNow} / ${hard}`;
   pitySoft.textContent = isW ? 'Soft pity (community estimate): from pull 64–65' : 'Soft pity (community): from pull 74';
   if (cards) renderCards(cards);
-  if (res) log.textContent = `${isW ? 'W-Engine' : banner.value}: ${res.join(' ')}
-` + (log.textContent.startsWith('Press') ? '' : log.textContent);
+  if (res) log.textContent = `${isW ? 'W-Engine' : banner.value}: ${res.join(', ')}\n` + (log.textContent.startsWith('Press') ? '' : log.textContent);
 }
 function doPulls(n) {
   const res = [], cards = [];
   const isW = channel === 'wengine';
+  const featuredName = isW ? HERO[banner.value].wengine.name : HERO[banner.value].name;
   for (let i = 0; i < n; i++) {
     total++;
+    let wonThis = false, rank = 'A';
     if (isW) {
       if (Math.random() < zzzWengineRate(pityW)) {
-        pityW = 0; pityAW = 0; s++;
-        if (guaranteedW || Math.random() < ZZZ_WENGINE.featuredChance) { res.push('S★'); won++; guaranteedW = false; }
-        else { res.push('S'); lost++; guaranteedW = true; }
-      } else { pityW++; pityAW = 0; res.push('A'); }
+        pityW = 0; pityAW = 0; s++; rank = 'S';
+        if (guaranteedW || Math.random() < ZZZ_WENGINE.featuredChance) { wonThis = true; won++; guaranteedW = false; }
+        else { lost++; guaranteedW = true; }
+      } else { pityW++; pityAW = 0; }
     } else {
       const r = pullOnce('ZZZ', pity, Math.random, pityA);
       if (r === 'S') {
-        pity = 0; pityA = 0; s++;
-        if (guaranteed || Math.random() < 0.5) { res.push('S★'); won++; guaranteed = false; }
-        else { res.push('S'); lost++; guaranteed = true; }
-      } else { pity++; pityA = 0; res.push('A'); }
+        pity = 0; pityA = 0; s++; rank = 'S';
+        if (guaranteed || Math.random() < 0.5) { wonThis = true; won++; guaranteed = false; }
+        else { lost++; guaranteed = true; }
+      } else { pity++; pityA = 0; }
     }
-    cards.push(cardFor(res[res.length - 1], isW));
+    const id = isW ? mapWenginePull(rank, wonThis, featuredName) : mapAgentPull(rank, wonThis, featuredName);
+    res.push((rank === 'S' ? (wonThis ? 'S★ ' : 'S ') : 'A ') + id.name);
+    cards.push(cardFor(rank, wonThis, isW, id));
   }
   render(res, cards);
 }
