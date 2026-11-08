@@ -36,3 +36,12 @@ footer{max-width:960px;margin:0 auto;padding:1rem;color:var(--muted);font-size:.
 .tabs button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
 .result{font-size:1.15rem;font-weight:700}
 @media(max-width:640px){h1{font-size:1.4rem}main{padding:.7rem .7rem 2rem}}
+
+.navdrop{position:relative;display:inline-block}
+.navdrop summary{cursor:pointer;list-style:none;font-size:.92rem;opacity:.9;color:#fff}
+.navdrop summary::-webkit-details-marker{display:none}
+.navdrop .drop{position:absolute;left:0;top:1.7rem;background:#23234a;border:1px solid #555;border-radius:8px;padding:.4rem;min-width:230px;z-index:20;display:flex;flex-direction:column}
+.navdrop .drop a{padding:.35rem .5rem}
+.navdrop .drop a:hover{background:#33335e}
+.navnote{font-size:.8rem;opacity:.7}
+@media(max-width:640px){.navdrop .drop{position:static;min-width:0}}
