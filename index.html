@@ -46,8 +46,8 @@
 <p>Free, no-login tools for <strong>Neverness to Everness (NTE)</strong> and <strong>Zenless Zone Zero (ZZZ)</strong>. Simulators, pity math, banner dates, tier snapshots, codes and databases — updated for NTE v1.5 and ZZZ v3.3, both arriving <strong>11 Nov 2026</strong>. PityHub is a multi-game hub: more games will be added later.</p>
 <div class="warn"><strong>About NTE rates:</strong> NTE gacha rates are <strong>community-modelled / unverified</strong> — no official Hotta / Perfect World rate sheet was found. Base S rate is disputed (0.6% CBT-era table vs 0.99% current community model); we use the 0.99% model and label it clearly. ZZZ Agent rates (0.6% base, hard pity 90, 50/50) are from the in-game Signal Search Details screen; ZZZ soft pity is community-measured.</div>
 
-<h2>Neverness to Everness (NTE) — v1.5 from 11 Nov 2026</h2>
-<div class="grid">
+<h2 class="game-h nte">Neverness to Everness (NTE) — v1.5 from 11 Nov 2026</h2>
+<div class="grid game-nte">
 <div class="tool"><h3>🎰 <a href="nte-simulator.html">NTE Wish Simulator</a></h3><p>Simulate Scarborough Fair pulls. Elyms (Phase 1) &amp; Exe (Phase 2) banners. No 50/50, hard pity 90.</p></div>
 <div class="tool"><h3>📊 <a href="pity-tracker.html?game=nte">NTE Pity Tracker</a></h3><p>Enter your current pity, see your exact odds for the next pulls — with cost in Annulith.</p></div>
 <div class="tool"><h3>👥 <a href="characters.html?game=nte">NTE Characters (26)</a></h3><p>Full roster: 20 S + 6 A, searchable by element and rank, with signature Arcs.</p></div>
@@ -57,8 +57,8 @@
 <div class="tool"><h3>🎁 <a href="codes.html#nte">NTE Codes</a></h3><p>Most v1.5 livestream codes are expired. New codes will be added on 11 Nov.</p></div>
 </div>
 
-<h2>Zenless Zone Zero (ZZZ) — v3.3 Phase 2 from 11 Nov 2026</h2>
-<div class="grid">
+<h2 class="game-h zzz">Zenless Zone Zero (ZZZ) — v3.3 Phase 2 from 11 Nov 2026</h2>
+<div class="grid game-zzz">
 <div class="tool"><h3>🎰 <a href="zzz-simulator.html">ZZZ Wish Simulator</a></h3><p>Simulate Signal Search. Severian banner from 11 Nov. 50/50, hard pity 90.</p></div>
 <div class="tool"><h3>📊 <a href="pity-tracker.html?game=zzz">ZZZ Pity Tracker</a></h3><p>Enter your current pity, see your exact odds for the next pulls — with cost in Polychrome.</p></div>
 <div class="tool"><h3>👥 <a href="characters.html?game=zzz">ZZZ Characters (62)</a></h3><p>Full roster: 61 live + Severian from 11 Nov, searchable by attribute, specialty and rank.</p></div>
@@ -86,9 +86,9 @@
 <pre id="out">Press a button to pull. Pity resets on S.</pre>
 <p><a href="nte-simulator.html">Full NTE simulator →</a> &nbsp; <a href="zzz-simulator.html">Full ZZZ simulator →</a></p>
 </div>
-<p class="note">Data checked 8 Nov 2026. Sources: Prydwen, Game8, ntegame.net, TimeSaver, Enka.Network, SenseOS, Fandom ZZZ Wiki, HoYoLAB / HoYoverse notices. No official game art is used on this site. NTE is © Hotta Studio / Perfect World; ZZZ is © HoYoverse.</p>
+<p class="note">Data checked 8 Nov 2026. Sources: Prydwen, Game8, ntegame.net, TimeSaver, Enka.Network, SenseOS, Fandom ZZZ Wiki, HoYoLAB / HoYoverse notices. Character/item artwork © HoYoverse / Hotta Studio &amp; Perfect World. Icons via Enka.Network / nte.wiki / Fandom. Used as small functional icons with attribution; NTE art is non-commercial per Perfect World guidelines.</p>
 </main>
-<footer>PityHub — NTE + ZZZ Hub. Not affiliated with Hotta Studio, Perfect World, or HoYoverse. More games coming soon.</footer>
+<footer>PityHub — NTE + ZZZ Hub. Data checked 8 Nov 2026. Not affiliated with Hotta Studio, Perfect World, or HoYoverse. Character/item artwork © HoYoverse / Hotta Studio &amp; Perfect World. More games coming soon.</footer>
 <script type="module">
 import { pullOnce, NTE, ZZZ } from './src/gacha.js';
 const out = document.getElementById('out');

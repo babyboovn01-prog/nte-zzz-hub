@@ -44,8 +44,9 @@
 </nav><span class="navnote">More games coming soon</span></div></header>
 <main>
 <h1>Character Database</h1>
-<p>Data checked 8 Nov 2026. Sources: Prydwen, ntegame.net, neverness.gg, TimeSaver. No official game art is used. Want their gear? See <a href="items.html">items</a> — and try them in the <a href="nte-simulator.html">NTE simulator</a> or <a href="zzz-simulator.html">ZZZ simulator</a>.</p>
+<p>Data checked 8 Nov 2026. Sources: Prydwen, ntegame.net, neverness.gg, TimeSaver. Character/item artwork © HoYoverse / Hotta Studio &amp; Perfect World. Icons via Enka.Network / nte.wiki / Fandom. Used as small functional icons with attribution; NTE art is non-commercial per Perfect World guidelines. Want their gear? See <a href="items.html">items</a> — and try them in the <a href="nte-simulator.html">NTE simulator</a> or <a href="zzz-simulator.html">ZZZ simulator</a>.</p>
 <div class="tabs"><button id="tabNTE" class="active">NTE — 26 characters</button><button id="tabZZZ">ZZZ — 62 Agents</button></div>
+<div class="filterbar">
 <label for="q">Search characters</label>
 <input id="q" type="search" placeholder="Type a name, e.g. Elyms or Severian…">
 <label for="attr">Attribute / Element filter</label>
@@ -53,23 +54,26 @@
 <label for="rank">Rank filter</label>
 <select id="rank"><option value="">All ranks</option><option value="S">S</option><option value="A">A</option><option value="I">I</option></select>
 <p class="note" id="count"></p>
+</div>
 
 <div id="nteBox">
 <h2>Neverness to Everness — 26 playable (20 S + 6 A)</h2>
 <p class="note">24 live on 8 Nov 2026 + Elyms and Exe (v1.5). Esper Zero counts once (one kit, male/female cards). * Arc-type naming: Synthesis / Condensate / Bose are used by different sources for the same 5th Arc type. Each character's signature Arc is in the <a href="items.html?game=nte">NTE items list</a>; current banners are on the <a href="banner-schedule.html#nte">NTE banner schedule</a>.</p>
-<div class="table-wrap"><table><thead><tr><th>Character</th><th>Rank</th><th>Element</th><th>Arc</th><th>Role</th><th>Status</th><th>Simulate</th></tr></thead><tbody id="nteRows"></tbody></table></div>
+<div class="table-wrap"><table><thead><tr><th>Icon</th><th>Character</th><th>Rank</th><th>Element</th><th>Arc</th><th>Role</th><th>Status</th><th>Simulate</th></tr></thead><tbody id="nteRows"></tbody></table></div>
 </div>
 
 <div id="zzzBox" style="display:none">
 <h2>Zenless Zone Zero — 62 Agents (61 live + Severian from 11 Nov)</h2>
 <p class="note">47 S-Rank (6 permanent, 41 limited), 13 A-Rank, 1 I-Rank (Pyrois). Counts as of 30 Oct 2026. Soldier 0 - Anby and Starlight - Billy Kid count separately from Anby / Billy Kid. Signature W-Engines are in the <a href="items.html?game=zzz">ZZZ items list</a>; current banners are on the <a href="banner-schedule.html#zzz">ZZZ banner schedule</a>.</p>
-<div class="table-wrap"><table><thead><tr><th>Agent</th><th>Rank</th><th>Attribute</th><th>Specialty</th><th>Faction</th><th>Ver.</th><th>Released</th><th>Simulate</th></tr></thead><tbody id="zzzRows"></tbody></table></div>
+<div class="table-wrap"><table><thead><tr><th>Icon</th><th>Agent</th><th>Rank</th><th>Attribute</th><th>Specialty</th><th>Faction</th><th>Ver.</th><th>Released</th><th>Simulate</th></tr></thead><tbody id="zzzRows"></tbody></table></div>
 </div>
 </main>
-<footer>PityHub — NTE + ZZZ Hub. Not affiliated with Hotta Studio, Perfect World, or HoYoverse. More games coming soon.</footer>
+<footer>PityHub — NTE + ZZZ Hub. Data checked 8 Nov 2026. Not affiliated with Hotta Studio, Perfect World, or HoYoverse. Character/item artwork © HoYoverse / Hotta Studio &amp; Perfect World. More games coming soon.</footer>
 <script type="module">
-import { NTE_ROSTER, ZZZ_ROSTER } from './src/characters.js';
+import { NTE_ROSTER, ZZZ_ROSTER, NTE_CHAR_IMG, ZZZ_AGENT_IMG } from './src/characters.js';
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
+const imgCell = (url, name, ph) => url ? `<img class="thumb" src="${url}" alt="${esc(name)}" loading="lazy" width="48" height="48" onerror="this.style.display='none'">` : `<span class="thumb-ph">${ph}</span>`;
+const ntePh = name => (name === 'Elyms' || name === 'Exe') ? 'Image coming with v1.5 (11 Nov)' : 'No image yet';
 let game = 'NTE';
 function fillAttrs() {
   const rows = game === 'NTE' ? NTE_ROSTER : ZZZ_ROSTER;
@@ -83,8 +87,8 @@ function render() {
   const rank = document.getElementById('rank').value;
   const filt = rows => rows.filter(r => (!q || r.join(' ').toLowerCase().includes(q)) && (!attr || r[2] === attr) && (!rank || r[1] === rank));
   const nte = filt(NTE_ROSTER), zzz = filt(ZZZ_ROSTER);
-  document.getElementById('nteRows').innerHTML = nte.map(r => `<tr>${r.map(c => `<td>${esc(c)}</td>`).join('')}<td><a href="nte-simulator.html">Simulate →</a></td></tr>`).join('') || '<tr><td colspan="7">No matches.</td></tr>';
-  document.getElementById('zzzRows').innerHTML = zzz.map(r => `<tr>${r.map(c => `<td>${esc(c)}</td>`).join('')}<td><a href="zzz-simulator.html">Simulate →</a></td></tr>`).join('') || '<tr><td colspan="8">No matches.</td></tr>';
+  document.getElementById('nteRows').innerHTML = nte.map(r => `<tr><td>${imgCell(NTE_CHAR_IMG[r[0]], r[0], ntePh(r[0]))}</td>${r.map(c => `<td>${esc(c)}</td>`).join('')}<td><a href="nte-simulator.html">Simulate →</a></td></tr>`).join('') || '<tr><td colspan="8">No matches.</td></tr>';
+  document.getElementById('zzzRows').innerHTML = zzz.map(r => `<tr><td>${imgCell(ZZZ_AGENT_IMG[r[0]], r[0], 'No image yet')}</td>${r.map(c => `<td>${esc(c)}</td>`).join('')}<td><a href="zzz-simulator.html">Simulate →</a></td></tr>`).join('') || '<tr><td colspan="9">No matches.</td></tr>';
   document.getElementById('count').textContent = game === 'NTE' ? `Showing ${nte.length} of 26 NTE characters.` : `Showing ${zzz.length} of 62 ZZZ Agents.`;
 }
 function setGame(g) {
