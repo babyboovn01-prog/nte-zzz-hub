@@ -48,6 +48,34 @@
     });
   }
 
+  // --- Active-page indication: highlight the nav link for this page ---
+  // Matches on file + query + hash (so pity-tracker.html?game=zzz highlights
+  // the ZZZ link and banner-schedule.html#nte highlights the NTE link), and
+  // falls back to matching by file only. Also covers the footer nav
+  // (About / Privacy / Contact). Runs on load; the script is deferred.
+  (function markActive() {
+    var here = location.pathname.split('/').pop() || 'index.html';
+    var full = here + location.search + location.hash;
+    var links = Array.prototype.slice.call(
+      document.querySelectorAll('header.site nav a, footer .footnav a')
+    );
+    var best = null;
+    links.forEach(function (a) {
+      var href = a.getAttribute('href') || '';
+      if (!best && (href === full || href === here)) best = a;
+    });
+    if (!best) {
+      links.forEach(function (a) {
+        var href = a.getAttribute('href') || '';
+        if (!best && href.split(/[?#]/)[0] === here) best = a;
+      });
+    }
+    if (best) {
+      best.classList.add('active');
+      best.setAttribute('aria-current', 'page');
+    }
+  })();
+
   // --- Dropdowns: one open at a time ---
   var drops = Array.prototype.slice.call(
     document.querySelectorAll('details.navdrop')
