@@ -177,3 +177,81 @@ footer a{color:var(--muted);text-decoration:underline}
   pre{font-size:.92rem}
   .result{font-size:1.1rem}
 }
+
+/* --- Wish Simulator redesign (8 Nov 2026): banner hero, pull cards,
+   pity meter, stat tiles, gold buttons, pill tabs --- */
+.sim-zzz{--game:var(--zzz);--game2:var(--zzz2)}
+.sim-nte{--game:var(--nte);--game2:var(--nte2)}
+.sim-hero{display:flex;align-items:stretch;border:1px solid var(--line2);border-radius:16px;overflow:hidden;margin:1rem 0;background:linear-gradient(135deg,#23234a,#141428)}
+.sim-hero-body{flex:1;padding:1.2rem 1.3rem;min-width:0}
+.sim-hero-eyebrow{font-size:.82rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--game2);margin:0}
+.sim-hero-name{font-size:1.9rem;line-height:1.15;margin:.25rem 0 .3rem}
+.sim-hero-badges{display:flex;flex-wrap:wrap;gap:.4rem;margin:.5rem 0}
+.sim-hero-badges .badge{font-size:.85rem;padding:.2rem .7rem}
+.sim-hero-dates{color:var(--muted);font-size:.92rem;margin:.3rem 0}
+.sim-hero-rerun{display:flex;align-items:center;gap:.5rem;margin-top:.75rem;color:var(--muted);font-size:.9rem}
+.sim-hero-rerun img{width:40px;height:40px;border-radius:8px;background:#26264a;object-fit:contain;flex-shrink:0}
+.sim-hero-media{flex:0 0 280px;position:relative;background:#12122a}
+.sim-hero-media img{width:100%;height:260px;object-fit:cover;object-position:top center;display:block}
+.sim-hero-ph{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:260px;padding:1rem;text-align:center;background:linear-gradient(160deg,#3d2c7a,#12122a)}
+.sim-hero-ph .big-s{font-size:4.5rem;font-weight:800;line-height:1;color:#ffd76a;text-shadow:0 0 24px rgba(245,197,66,.5)}
+.sim-hero-ph .ph-init{font-size:1.15rem;font-weight:700;margin-top:.2rem}
+.sim-hero-ph .ph-note{color:var(--muted);font-size:.85rem;margin-top:.45rem;max-width:240px}
+.rate-chips{display:flex;flex-wrap:wrap;gap:.45rem;margin:.7rem 0 .2rem}
+.rate-chip{background:#26264a;border:1px solid var(--line2);border-radius:20px;padding:.25rem .75rem;font-size:.85rem;font-weight:700}
+.rate-chip.unverified{border-color:#8a6d1f;color:#ffe9a8;background:#2b2408}
+.rates-panel{background:var(--card);border:1px solid var(--line2);border-left:4px solid var(--game);border-radius:12px;padding:.9rem 1.1rem;font-size:.92rem;margin:1rem 0}
+.rates-panel h3{margin:0 0 .35rem;font-size:1rem}
+.rates-panel p{margin:.3rem 0}
+.ctl-label{display:block;font-weight:600;margin:.6rem 0 .25rem}
+.sim-controls{display:flex;flex-wrap:wrap;gap:.4rem 1.4rem;align-items:flex-end}
+.pill-tabs{display:inline-flex;gap:.4rem;background:#12122a;border:1px solid var(--line2);border-radius:999px;padding:.3rem}
+.pill-tabs button{min-height:44px;margin:0;border-radius:999px;border:1px solid transparent;background:transparent;color:var(--ink);font-size:.95rem;padding:.45rem 1.1rem}
+.pill-tabs button.active{background:var(--zzz2);color:#241200;border-color:var(--zzz2);font-weight:700}
+.card .pill-tabs button{display:inline-flex;width:auto}
+.pity-meter{position:relative;height:26px;background:#12122a;border:1px solid var(--line2);border-radius:999px;margin:.9rem 0 .3rem;overflow:visible}
+.pity-fill{height:100%;width:0%;border-radius:999px;background:linear-gradient(90deg,var(--game),var(--game2));transition:width .35s ease}
+.pity-mark{position:absolute;top:-3px;bottom:-3px;width:2px;background:#ffe9a8;opacity:.85}
+.pity-label{display:flex;justify-content:space-between;gap:.6rem;font-size:.88rem;color:var(--muted)}
+.pity-label b{color:var(--ink)}
+.stat-tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:.6rem;margin:.9rem 0}
+.stat-tile{background:#12122a;border:1px solid var(--line);border-radius:10px;padding:.6rem .7rem;text-align:center}
+.stat-tile .num{display:block;font-size:1.35rem;font-weight:800;line-height:1.2}
+.stat-tile .lbl{font-size:.76rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.stat-tile.gold .num{color:#ffd76a}
+.sim-actions{display:flex;gap:.6rem;flex-wrap:wrap;margin:.9rem 0 .2rem}
+.sim-actions button{flex:1 1 auto}
+.sim-actions button:active{transform:scale(.97)}
+.btn-gold{background:linear-gradient(180deg,#ffd76a,#f5b81f);color:#241a00;border-color:#d99e06;font-weight:800}
+.btn-gold:hover{filter:brightness(1.07)}
+.btn-sec{background:transparent;color:#fff;border-color:var(--game)}
+.btn-sec:hover{background:rgba(255,255,255,.06)}
+.pull-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:.6rem;margin:.8rem 0}
+.pull-card{border-radius:12px;padding:.55rem .3rem .5rem;text-align:center;background:#12122a;border:2px solid var(--line2);animation:pullIn .35s ease both}
+.pull-card.rar-s{border-color:#f5c542;box-shadow:0 0 14px rgba(245,197,66,.35);background:linear-gradient(180deg,#3a2f05,#12122a)}
+.pull-card.rar-a{border-color:#8b7cff;background:linear-gradient(180deg,#241d4d,#12122a)}
+.pull-card img{width:56px;height:56px;object-fit:contain;border-radius:8px}
+.pull-card .pc-tile{width:56px;height:56px;margin:0 auto;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.7rem;font-weight:800}
+.pull-card.rar-s .pc-tile{background:#f5c542;color:#241a00}
+.pull-card.rar-a .pc-tile{background:#8b7cff;color:#fff}
+.pull-card .pc-tag,.pull-card .pc-name{display:block}
+.pull-card .pc-tag{font-size:.68rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;margin-top:.3rem}
+.pull-card.rar-s .pc-tag{color:#ffd76a}
+.pull-card.rar-a .pc-tag{color:#b3a6ff}
+.pull-card .pc-name{font-size:.78rem;font-weight:700;line-height:1.25;margin-top:.15rem;min-height:2em}
+@keyframes pullIn{from{opacity:0;transform:translateY(10px) scale(.9)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.pull-card{animation:none}}
+.pulls-empty{grid-column:1/-1;text-align:center;color:var(--muted);padding:1.2rem;border:1px dashed var(--line2);border-radius:12px}
+.pull-log-h{margin:1rem 0 .3rem;font-size:.95rem;color:var(--muted)}
+@media(max-width:640px){
+  .sim-hero{flex-direction:column}
+  .sim-hero-media{flex:none}
+  .sim-hero-media img{height:190px}
+  .sim-hero-ph{min-height:190px}
+  .sim-hero-ph .big-s{font-size:3.2rem}
+  .sim-hero-name{font-size:1.55rem}
+  .pull-grid{gap:.4rem}
+  .pull-card img,.pull-card .pc-tile{width:44px;height:44px}
+  .pull-card .pc-name{font-size:.7rem}
+  .sim-actions button{flex:1 1 100%}
+}
